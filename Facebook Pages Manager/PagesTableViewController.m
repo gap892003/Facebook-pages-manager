@@ -9,6 +9,7 @@
 #import "PagesTableViewController.h"
 #import "PostsTableViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "UIImageView+ImageHelper.h"
 
 @interface PagesTableViewController ()
 @property (nonatomic,copy) NSArray *pages;
@@ -83,8 +84,10 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    cell.textLabel.text = @"I'm a UITableViewCell!";
+    NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
+    cell.textLabel.text = [currentPage valueForKey:@"name"];
     cell.imageView.image = [UIImage imageNamed:@"PagesIcon.jpg"];
+    [cell.imageView lazyLoadImageForPage:[currentPage valueForKey:@"id"]];
     return cell;
 }
 

@@ -23,6 +23,7 @@
 		F4BD1F091F271B1A00C7A82D /* PostImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F081F271B1A00C7A82D /* PostImageTableViewCell.m */; };
 		F4BD1F0C1F271BD400C7A82D /* PostTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F0B1F271BD400C7A82D /* PostTextTableViewCell.m */; };
 		F4BD1F131F2720B700C7A82D /* PagesIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */; };
+		F4BD1F171F272FE200C7A82D /* UIImageView+ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		F4BD1F0A1F271BD400C7A82D /* PostTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextTableViewCell.h; sourceTree = "<group>"; };
 		F4BD1F0B1F271BD400C7A82D /* PostTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTextTableViewCell.m; sourceTree = "<group>"; };
 		F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PagesIcon.jpg; sourceTree = "<group>"; };
+		F4BD1F151F272FE200C7A82D /* UIImageView+ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageHelper.h"; sourceTree = "<group>"; };
+		F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageHelper.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,7 @@
 		F40E07541F20774200EC1C2D /* Facebook Pages Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F4BD1F141F272F9D00C7A82D /* Helper */,
 				F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */,
 				F40E07581F20774200EC1C2D /* AppDelegate.h */,
 				F40E07591F20774200EC1C2D /* AppDelegate.m */,
@@ -196,6 +200,15 @@
 				F4BD1F051F25DD8100C7A82D /* PagesTableViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F4BD1F141F272F9D00C7A82D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F4BD1F151F272FE200C7A82D /* UIImageView+ImageHelper.h */,
+				F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */,
+			);
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +353,7 @@
 				F40E075A1F20774200EC1C2D /* AppDelegate.m in Sources */,
 				F4BD1F061F25DD8100C7A82D /* PagesTableViewController.m in Sources */,
 				F4BD1F091F271B1A00C7A82D /* PostImageTableViewCell.m in Sources */,
+				F4BD1F171F272FE200C7A82D /* UIImageView+ImageHelper.m in Sources */,
 				F40E07631F20774200EC1C2D /* Facebook_Pages_Manager.xcdatamodeld in Sources */,
 				F40E07571F20774200EC1C2D /* main.m in Sources */,
 				F4BD1F031F23437500C7A82D /* PostsTableViewController.m in Sources */,
