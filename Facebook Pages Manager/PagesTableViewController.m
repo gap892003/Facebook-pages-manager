@@ -25,8 +25,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
-//    self.tableView.estimatedRowHeight = 140;
     
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
@@ -39,8 +37,6 @@
              }
          }];
     }
-
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,11 +75,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString* CellIdentifier = @"Cell";
+    static NSString* cellIdentifier = @"Cell";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
     cell.textLabel.text = [currentPage valueForKey:@"name"];
     cell.imageView.image = [UIImage imageNamed:@"PagesIcon.jpg"];

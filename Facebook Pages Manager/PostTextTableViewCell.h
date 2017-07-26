@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PostTextTableViewCell : UITableViewCell
+@interface PostTextTableViewCell : PostsTableViewCell
 @property(nonatomic,weak) IBOutlet UILabel *text;
 @end

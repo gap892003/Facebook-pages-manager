@@ -21,9 +21,10 @@
 		F4BD1F031F23437500C7A82D /* PostsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F021F23437500C7A82D /* PostsTableViewController.m */; };
 		F4BD1F061F25DD8100C7A82D /* PagesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F051F25DD8100C7A82D /* PagesTableViewController.m */; };
 		F4BD1F091F271B1A00C7A82D /* PostImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F081F271B1A00C7A82D /* PostImageTableViewCell.m */; };
-		F4BD1F0C1F271BD400C7A82D /* PostTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F0B1F271BD400C7A82D /* PostTextTableViewCell.m */; };
 		F4BD1F131F2720B700C7A82D /* PagesIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */; };
 		F4BD1F171F272FE200C7A82D /* UIImageView+ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */; };
+		F4BD1F191F286DD000C7A82D /* imageplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F181F286DD000C7A82D /* imageplaceholder.jpg */; };
+		F4BD1F1C1F287BDF00C7A82D /* PostsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F1B1F287BDF00C7A82D /* PostsTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,11 +70,12 @@
 		F4BD1F051F25DD8100C7A82D /* PagesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagesTableViewController.m; sourceTree = "<group>"; };
 		F4BD1F071F271B1A00C7A82D /* PostImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostImageTableViewCell.h; sourceTree = "<group>"; };
 		F4BD1F081F271B1A00C7A82D /* PostImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostImageTableViewCell.m; sourceTree = "<group>"; };
-		F4BD1F0A1F271BD400C7A82D /* PostTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTextTableViewCell.h; sourceTree = "<group>"; };
-		F4BD1F0B1F271BD400C7A82D /* PostTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostTextTableViewCell.m; sourceTree = "<group>"; };
 		F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = PagesIcon.jpg; sourceTree = "<group>"; };
 		F4BD1F151F272FE200C7A82D /* UIImageView+ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageHelper.h"; sourceTree = "<group>"; };
 		F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageHelper.m"; sourceTree = "<group>"; };
+		F4BD1F181F286DD000C7A82D /* imageplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = imageplaceholder.jpg; sourceTree = "<group>"; };
+		F4BD1F1A1F287BDF00C7A82D /* PostsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsTableViewCell.h; sourceTree = "<group>"; };
+		F4BD1F1B1F287BDF00C7A82D /* PostsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		F40E07541F20774200EC1C2D /* Facebook Pages Manager */ = {
 			isa = PBXGroup;
 			children = (
+				F4BD1F181F286DD000C7A82D /* imageplaceholder.jpg */,
 				F4BD1F141F272F9D00C7A82D /* Helper */,
 				F4BD1F121F2720B700C7A82D /* PagesIcon.jpg */,
 				F40E07581F20774200EC1C2D /* AppDelegate.h */,
@@ -183,8 +186,8 @@
 			children = (
 				F4BD1F071F271B1A00C7A82D /* PostImageTableViewCell.h */,
 				F4BD1F081F271B1A00C7A82D /* PostImageTableViewCell.m */,
-				F4BD1F0A1F271BD400C7A82D /* PostTextTableViewCell.h */,
-				F4BD1F0B1F271BD400C7A82D /* PostTextTableViewCell.m */,
+				F4BD1F1A1F287BDF00C7A82D /* PostsTableViewCell.h */,
+				F4BD1F1B1F287BDF00C7A82D /* PostsTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				F40E07681F20774200EC1C2D /* LaunchScreen.storyboard in Resources */,
 				F4BD1F131F2720B700C7A82D /* PagesIcon.jpg in Resources */,
 				F40E07651F20774200EC1C2D /* Assets.xcassets in Resources */,
+				F4BD1F191F286DD000C7A82D /* imageplaceholder.jpg in Resources */,
 				F40E07601F20774200EC1C2D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,13 +352,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4BD1F0C1F271BD400C7A82D /* PostTextTableViewCell.m in Sources */,
 				F40E075D1F20774200EC1C2D /* ViewController.m in Sources */,
 				F40E075A1F20774200EC1C2D /* AppDelegate.m in Sources */,
 				F4BD1F061F25DD8100C7A82D /* PagesTableViewController.m in Sources */,
 				F4BD1F091F271B1A00C7A82D /* PostImageTableViewCell.m in Sources */,
 				F4BD1F171F272FE200C7A82D /* UIImageView+ImageHelper.m in Sources */,
 				F40E07631F20774200EC1C2D /* Facebook_Pages_Manager.xcdatamodeld in Sources */,
+				F4BD1F1C1F287BDF00C7A82D /* PostsTableViewCell.m in Sources */,
 				F40E07571F20774200EC1C2D /* main.m in Sources */,
 				F4BD1F031F23437500C7A82D /* PostsTableViewController.m in Sources */,
 			);

@@ -10,4 +10,5 @@
 
 @interface PostsTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, copy) NSDictionary *pageDetails;
+@property(nonatomic, copy) NSArray *posts;
 @end

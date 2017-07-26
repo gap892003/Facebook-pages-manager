@@ -7,6 +7,8 @@
 //
 
 #import "PostsTableViewController.h"
+#import "PostImageTableViewCell.h"
+#import "PostsTableViewCell.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface PostsTableViewController ()
@@ -28,11 +30,12 @@
     self.tableView.estimatedRowHeight = 140;
 }
 
-
 -(void) viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
     [self setTitle:[self.pageDetails valueForKey:@"name"]];
+    if (_pageDetails == nil) return;
+    [self getPageFeed];    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,22 +47,50 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 0;
+    return [_posts count];
 }
 
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Configure the cell...
+    NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
+    NSLog(@"************************");
+    NSLog(@"%@",[post objectForKey:@"type"] );
+    NSLog(@"%@",[post objectForKey:@"message"] );
+    NSLog(@"************************");
+    PostsTableViewCell *cell;
     
-//    return cell;
-//}
+    if ([[post objectForKey:@"type"] isEqualToString:@"photo"]){
+        
+        static NSString* cellIdentifier = @"postsImageViewCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        //[[(PostImageTableViewCell*)cell image] setHidden:false];
+        //[cell.imageView lazyLoadImageForPage:];
+    }else{
+        
+        static NSString* cellIdentifier = @"postsTextViewCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    }
+    
+    cell.message.text = [post valueForKey:@"message"];
+
+  /// Make a Superclass for both cells
+ if ([post valueForKey:@"views"] != nil){
+        
+        cell.viewsContainer.hidden = false;
+        
+    }else{
+    
+        cell.viewsContainer.hidden = true;
+    }
+
+    return cell;
+}
 
 
 /*
@@ -105,5 +136,22 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) getPageFeed{
+
+    if ([FBSDKAccessToken currentAccessToken]) {
+        
+        NSString* pageid =[_pageDetails valueForKey:@"id"];
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/feed"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type",} HTTPMethod:@"GET"]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 
+                 NSLog(@"%@", result);
+                 _posts = [result valueForKey:@"data"];
+                 [self.tableView reloadData];
+             }
+         }];
+    }
+}
 
 @end

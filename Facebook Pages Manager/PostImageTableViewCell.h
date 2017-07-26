@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PostsTableViewCell.h"
 
-@interface PostImageTableViewCell : UITableViewCell
+@interface PostImageTableViewCell : PostsTableViewCell
 @property(nonatomic,weak) IBOutlet UIImageView *image;
-@property(nonatomic,weak) IBOutlet UILabel *text;
-@property(nonatomic,weak) IBOutlet UILabel *views;
 @end
