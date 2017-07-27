@@ -28,7 +28,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 140;
+    self.tableView.estimatedRowHeight = 500;
     UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
     self.navigationItem.rightBarButtonItem = item;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -55,13 +55,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_posts count] ;
+    return [_posts count]*2 ;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
+    if ([indexPath row]%2!=0){
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"blank"];
+        return cell;
+    }
+    
+    NSDictionary *post = [_posts objectAtIndex:[indexPath row]/2];
     NSLog(@"************************");
     NSLog(@"%@",[post objectForKey:@"type"] );
     NSLog(@"%@",[post objectForKey:@"message"] );
@@ -157,7 +163,18 @@
     }
 }
 
--(void) createPost{
-
+-(void) createPost{    
+/*    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        [[[FBSDKGraphRequest alloc]
+          initWithGraphPath:@"me/feed"
+          parameters: @{ @"message" : @"hello world"}
+          HTTPMethod:@"POST"]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSLog(@"Post id:%@", result[@"id"]);
+             }
+         }];
+    }
+*/
 }
 @end

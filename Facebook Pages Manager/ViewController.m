@@ -34,25 +34,12 @@
              }
          }];
     }
-
-/*    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        [[[FBSDKGraphRequest alloc]
-          initWithGraphPath:@"me/feed"
-          parameters: @{ @"message" : @"hello world"}
-          HTTPMethod:@"POST"]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSLog(@"Post id:%@", result[@"id"]);
-             }
-         }];
-    }
-*/
 }
 
 - (void) viewDidAppear:(BOOL)animated{
     
-    [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
-    [self.stackView invalidateIntrinsicContentSize];
+    [super viewDidAppear:animated];
+    [self updateView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,14 +52,17 @@
 didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
               error:(NSError *)error{
     
-    [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
-    [self.stackView invalidateIntrinsicContentSize];
+    [self updateView];
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
 
+    [self updateView];
+}
+
+-(void) updateView{
+    
     [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
     [self.stackView invalidateIntrinsicContentSize];
 }
-
 @end
