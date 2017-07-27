@@ -25,9 +25,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+    
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
+    self.navigationItem.rightBarButtonItem = item;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -52,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return [_posts count];
+    return [_posts count] ;
 }
 
 
@@ -154,4 +158,7 @@
     }
 }
 
+-(void) createPost{
+
+}
 @end
