@@ -83,6 +83,7 @@
     NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
     cell.textLabel.text = [currentPage valueForKey:@"name"];
     [cell.imageView lazyLoadImageForPage:[currentPage objectForKey:@"picture"]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }
 
