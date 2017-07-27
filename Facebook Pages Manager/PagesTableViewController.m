@@ -74,7 +74,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    static NSString* cellIdentifier = @"Cell";
+    static NSString* cellIdentifier = @"cell";
     
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil){
@@ -82,7 +82,6 @@
     }
     NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
     cell.textLabel.text = [currentPage valueForKey:@"name"];
-    cell.imageView.image = [UIImage imageNamed:@"PagesIcon.jpg"];
     [cell.imageView lazyLoadImageForPage:[currentPage objectForKey:@"picture"]];
     return cell;
 }

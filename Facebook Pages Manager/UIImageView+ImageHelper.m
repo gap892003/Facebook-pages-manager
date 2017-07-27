@@ -61,7 +61,7 @@
         if (image == nil) return;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setImage:image];
-            [self setNeedsDisplay];        
+            [self setNeedsDisplay];
         });
     });
 }

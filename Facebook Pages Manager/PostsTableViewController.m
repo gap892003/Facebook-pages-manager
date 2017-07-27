@@ -79,7 +79,7 @@
         static NSString* cellIdentifier = @"postsImageViewCell";
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         //[[(PostImageTableViewCell*)cell image] setHidden:false];
-        [cell.imageView lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
+        [[(PostImageTableViewCell*)cell  image] lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
     }else{
         
         static NSString* cellIdentifier = @"postsTextViewCell";
