@@ -11,6 +11,7 @@
 
 @implementation UIImageView (ImageHelper)
 
+/*
 -(void)lazyLoadImageForPage: (NSString*) pageId{
     
     self.image = [UIImage imageNamed:@"imageplaceholder.jpg"];
@@ -19,8 +20,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                      initWithGraphPath:[NSString stringWithFormat:@"/%@/picture",pageId]
-                                      parameters:nil
+                                      initWithGraphPath:[NSString stringWithFormat:@"/%@/picture?redirect=1",pageId]
+                                      parameters:@{ @"fields":@"picture.type(normal)"}
                                       HTTPMethod:@"GET"];
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
@@ -35,6 +36,33 @@
             });
            
         }];
+    });
+}*/
+
+
+-(void)lazyLoadImageForPage: (NSDictionary*) picture{
+    
+    NSString *url = nil;
+    if (picture != nil) {
+        NSDictionary* data=[picture objectForKey:@"data"];
+        url = [data objectForKey:@"url"];
+    }
+    [self lazyLoadWithUrl:url];
+}
+
+-(void) lazyLoadWithUrl:(NSString*) url{
+
+    self.image = [UIImage imageNamed:@"imageplaceholder.jpg"];
+    if (url == nil ) return;
+    // make network request here
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+        if (image == nil) return;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setImage:image];
+            [self setNeedsDisplay];        
+        });
     });
 }
 

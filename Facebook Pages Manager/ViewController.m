@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface ViewController ()
@@ -22,11 +21,10 @@
     
     // Do any additional setup after loading the view, typically from a nib.
     _loginButton = [[FBSDKLoginButton alloc] init];
-    //_loginButton.center = self.view.center;
-    //[self.view addSubview:_loginButton];
     [self.stackView addArrangedSubview:_loginButton];
     _loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     _loginButton.publishPermissions = @[@"manage_pages", @"publish_pages",@"publish_actions"];
+    [_loginButton setDelegate:self];
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:nil]
@@ -54,6 +52,7 @@
 - (void) viewDidAppear:(BOOL)animated{
     
     [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
+    [self.stackView invalidateIntrinsicContentSize];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,5 +61,18 @@
     
 }
 
+- (void)loginButton:(FBSDKLoginButton *)loginButton
+didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
+              error:(NSError *)error{
+    
+    [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
+    [self.stackView invalidateIntrinsicContentSize];
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton{
+
+    [self.continueButton setHidden:([FBSDKAccessToken currentAccessToken]==NO)];
+    [self.stackView invalidateIntrinsicContentSize];
+}
 
 @end

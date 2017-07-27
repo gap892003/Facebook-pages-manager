@@ -6,10 +6,11 @@
 //  Copyright © 2017 Gaurav Joshi. All rights reserved.
 //
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PostsTableViewController.h"
 #import "PostImageTableViewCell.h"
 #import "PostsTableViewCell.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "UIImageView+ImageHelper.h"
 
 @interface PostsTableViewController ()
 
@@ -50,12 +51,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     return [_posts count] ;
 }
 
@@ -74,7 +73,7 @@
         static NSString* cellIdentifier = @"postsImageViewCell";
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         //[[(PostImageTableViewCell*)cell image] setHidden:false];
-        //[cell.imageView lazyLoadImageForPage:];
+        [cell.imageView lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
     }else{
         
         static NSString* cellIdentifier = @"postsTextViewCell";
@@ -84,14 +83,14 @@
     cell.message.text = [post valueForKey:@"message"];
 
   /// Make a Superclass for both cells
- if ([post valueForKey:@"views"] != nil){
-        
-        cell.viewsContainer.hidden = false;
-        
-    }else{
-    
-        cell.viewsContainer.hidden = true;
-    }
+// if ([post valueForKey:@"views"] != nil){
+//        
+//        cell.viewsContainer.hidden = false;
+//        
+//    }else{
+//    
+//        cell.viewsContainer.hidden = true;
+//    }
 
     return cell;
 }

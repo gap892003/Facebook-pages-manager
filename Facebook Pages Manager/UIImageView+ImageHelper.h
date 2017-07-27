@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (ImageHelper)
--(void)lazyLoadImageForPage: (NSString*) pageId;
+-(void)lazyLoadImageForPage: (NSDictionary*) picture;
+-(void) lazyLoadWithUrl:(NSString*) url;
 @end

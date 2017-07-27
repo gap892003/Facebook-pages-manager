@@ -25,10 +25,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:nil]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:@{@"fields":@"access_token,category,id,name,perms,picture"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"fetched user:%@", result);
@@ -84,7 +83,7 @@
     NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
     cell.textLabel.text = [currentPage valueForKey:@"name"];
     cell.imageView.image = [UIImage imageNamed:@"PagesIcon.jpg"];
-    [cell.imageView lazyLoadImageForPage:[currentPage valueForKey:@"id"]];
+    [cell.imageView lazyLoadImageForPage:[currentPage objectForKey:@"picture"]];
     return cell;
 }
 

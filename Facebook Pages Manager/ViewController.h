@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <FBSDKLoginButtonDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIStackView *stackView;
 @end
