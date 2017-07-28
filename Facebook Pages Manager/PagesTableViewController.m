@@ -27,7 +27,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:@{@"fields":@"access_token,category,id,name,perms,picture"}]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:@{@"fields":@"access_token,category,id,name,perms,picture",}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"fetched user:%@", result);

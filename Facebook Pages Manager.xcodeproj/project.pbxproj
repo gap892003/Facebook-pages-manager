@@ -26,6 +26,8 @@
 		F4BD1F191F286DD000C7A82D /* imageplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F181F286DD000C7A82D /* imageplaceholder.jpg */; };
 		F4BD1F1C1F287BDF00C7A82D /* PostsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F1B1F287BDF00C7A82D /* PostsTableViewCell.m */; };
 		F4BD1F1E1F29923400C7A82D /* Post.png in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F1D1F29923400C7A82D /* Post.png */; };
+		F4BD1F211F29D2AC00C7A82D /* UILabel+ViewCount.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */; };
+		F4BD1F241F2ACB3C00C7A82D /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,10 @@
 		F4BD1F1A1F287BDF00C7A82D /* PostsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsTableViewCell.h; sourceTree = "<group>"; };
 		F4BD1F1B1F287BDF00C7A82D /* PostsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsTableViewCell.m; sourceTree = "<group>"; };
 		F4BD1F1D1F29923400C7A82D /* Post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Post.png; sourceTree = "<group>"; };
+		F4BD1F1F1F29D2AC00C7A82D /* UILabel+ViewCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ViewCount.h"; sourceTree = "<group>"; };
+		F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ViewCount.m"; sourceTree = "<group>"; };
+		F4BD1F221F2ACB3C00C7A82D /* CreatePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePostViewController.h; sourceTree = "<group>"; };
+		F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +210,8 @@
 				F4BD1F021F23437500C7A82D /* PostsTableViewController.m */,
 				F4BD1F041F25DD8100C7A82D /* PagesTableViewController.h */,
 				F4BD1F051F25DD8100C7A82D /* PagesTableViewController.m */,
+				F4BD1F221F2ACB3C00C7A82D /* CreatePostViewController.h */,
+				F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -213,6 +221,8 @@
 			children = (
 				F4BD1F151F272FE200C7A82D /* UIImageView+ImageHelper.h */,
 				F4BD1F161F272FE200C7A82D /* UIImageView+ImageHelper.m */,
+				F4BD1F1F1F29D2AC00C7A82D /* UILabel+ViewCount.h */,
+				F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -358,11 +368,13 @@
 			files = (
 				F40E075D1F20774200EC1C2D /* ViewController.m in Sources */,
 				F40E075A1F20774200EC1C2D /* AppDelegate.m in Sources */,
+				F4BD1F241F2ACB3C00C7A82D /* CreatePostViewController.m in Sources */,
 				F4BD1F061F25DD8100C7A82D /* PagesTableViewController.m in Sources */,
 				F4BD1F091F271B1A00C7A82D /* PostImageTableViewCell.m in Sources */,
 				F4BD1F171F272FE200C7A82D /* UIImageView+ImageHelper.m in Sources */,
 				F40E07631F20774200EC1C2D /* Facebook_Pages_Manager.xcdatamodeld in Sources */,
 				F4BD1F1C1F287BDF00C7A82D /* PostsTableViewCell.m in Sources */,
+				F4BD1F211F29D2AC00C7A82D /* UILabel+ViewCount.m in Sources */,
 				F40E07571F20774200EC1C2D /* main.m in Sources */,
 				F4BD1F031F23437500C7A82D /* PostsTableViewController.m in Sources */,
 			);

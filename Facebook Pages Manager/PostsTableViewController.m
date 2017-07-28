@@ -11,6 +11,7 @@
 #import "PostImageTableViewCell.h"
 #import "PostsTableViewCell.h"
 #import "UIImageView+ImageHelper.h"
+#import "CreatePostViewController.h"
 
 @interface PostsTableViewController ()
 
@@ -87,7 +88,7 @@
     }
     
     cell.message.text = [post valueForKey:@"message"];
-
+    cell.viewsContainer.hidden = true;
   /// Make a Superclass for both cells
 // if ([post valueForKey:@"views"] != nil){
 //        
@@ -163,18 +164,17 @@
     }
 }
 
--(void) createPost{    
-/*    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        [[[FBSDKGraphRequest alloc]
-          initWithGraphPath:@"me/feed"
-          parameters: @{ @"message" : @"hello world"}
-          HTTPMethod:@"POST"]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSLog(@"Post id:%@", result[@"id"]);
-             }
-         }];
-    }
-*/
+-(void) createPost{
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *posts = [storyBoard instantiateViewControllerWithIdentifier:@"createPosts"];
+    posts.modalPresentationStyle = UIModalPresentationPopover;
+    UIPopoverPresentationController *popover =  posts.popoverPresentationController;
+    [popover setDelegate:self];
+    [self.navigationController presentViewController:posts animated:YES completion:^{
+        
+    }];
+    
 }
+
 @end

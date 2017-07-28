@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="1588" y="102.99850074962519"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Post-->
         <scene sceneID="8Td-4g-bgl">
             <objects>
-                <viewController id="gmE-Cj-MEQ" sceneMemberID="viewController">
+                <viewController title="Create Post" id="gmE-Cj-MEQ" customClass="CreatePostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fwi-W8-O98"/>
                         <viewControllerLayoutGuide type="bottom" id="aBz-CW-ol4"/>
@@ -128,12 +128,85 @@
                     <view key="view" contentMode="scaleToFill" id="aMj-am-ade">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="XHS-Wc-IfD">
+                                <rect key="frame" x="0.0" y="75" width="375" height="150"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="86e-ig-FrO">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="rSp-KA-bXj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="gmE-Cj-MEQ" id="9k5-he-1UE"/>
+                                        </connections>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mY9-5V-11O">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GV-UB-VVE">
+                                                <rect key="frame" x="290" y="10" width="85" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Post"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-12-36e">
+                                                <rect key="frame" x="219" y="10" width="77" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Schedule"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-K4-vCh">
+                                                <rect key="frame" x="117" y="10" width="94" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Save Draft"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="iDf-cF-QQD"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="86e-ig-FrO" firstAttribute="centerX" secondItem="XHS-Wc-IfD" secondAttribute="centerX" id="Wkx-yA-wMW"/>
+                                    <constraint firstItem="mY9-5V-11O" firstAttribute="centerX" secondItem="XHS-Wc-IfD" secondAttribute="centerX" id="lG8-Hy-gku"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="XHS-Wc-IfD" firstAttribute="top" secondItem="Fwi-W8-O98" secondAttribute="bottom" constant="11" id="M2Q-x4-85W"/>
+                            <constraint firstItem="XHS-Wc-IfD" firstAttribute="centerX" secondItem="aMj-am-ade" secondAttribute="centerX" id="dqV-Lu-IYT"/>
+                            <constraint firstItem="XHS-Wc-IfD" firstAttribute="leading" secondItem="aMj-am-ade" secondAttribute="leading" id="jTI-NA-OCq"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Dbk-8i-LkB" appends="YES" id="3KB-uU-Y25"/>
+                        </connections>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Create Post" id="2SV-YC-GS5">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="uUB-Gs-CL9">
+                            <connections>
+                                <action selector="dismissSelf:" destination="gmE-Cj-MEQ" id="t1i-dq-065"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textView" destination="86e-ig-FrO" id="uma-VL-EuI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Noj-yC-aH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Dbk-8i-LkB">
+                    <connections>
+                        <action selector="dismissKeyPad:" destination="gmE-Cj-MEQ" id="t2O-Ri-BTR"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2362" y="105"/>
+            <point key="canvasLocation" x="4756" y="70.614692653673174"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="k1o-qr-hn4">
@@ -325,7 +398,28 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vzt-WH-FnO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3173.5999999999999" y="102.09895052473765"/>
+            <point key="canvasLocation" x="2439" y="103"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VJD-Cc-d31">
+            <objects>
+                <navigationController restorationIdentifier="createPosts" storyboardIdentifier="createPosts" automaticallyAdjustsScrollViewInsets="NO" id="fPM-Pf-D24" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfz-d4-jNO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="gmE-Cj-MEQ" kind="relationship" relationship="rootViewController" id="aKh-hQ-ein"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLO-K6-ZND" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Item" style="done" id="FSQ-wB-A7h"/>
+                <barButtonItem title="Item" id="TZ6-gH-Yf3"/>
+                <navigationItem title="Title" id="Ill-Ye-uiE"/>
+            </objects>
+            <point key="canvasLocation" x="3908" y="71"/>
         </scene>
     </scenes>
     <resources>

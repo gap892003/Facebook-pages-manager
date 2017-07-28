@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PostsTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
+@interface PostsTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,
+                                                            UIPopoverPresentationControllerDelegate>
 @property(nonatomic, copy) NSDictionary *pageDetails;
 @property(nonatomic, copy) NSArray *posts;
 @end
