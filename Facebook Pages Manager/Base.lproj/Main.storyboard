@@ -374,10 +374,8 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="njU-X4-E00">
                                             <rect key="frame" x="5" y="5" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Axf-1P-xdY"/>
                                                 <constraint firstAttribute="height" constant="20" id="I5k-Pa-1qq"/>
                                                 <constraint firstAttribute="width" constant="20" id="WkB-Xw-lvW"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="Yww-w3-2yW"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>

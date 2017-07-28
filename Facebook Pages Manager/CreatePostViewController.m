@@ -75,10 +75,12 @@ static NSString* placeHolderText = @"Write here";
         return;
     }
     
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-        [[[FBSDKGraphRequest alloc]
-          initWithGraphPath:[NSString stringWithFormat:@"/%@/feed",_pageId]
+    
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"manage_pages"]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/feed",_pageId]
           parameters: @{ @"message" : _textView.text}
+          tokenString: _pageAccessToken
+          version:@"v2.10"
           HTTPMethod:@"POST"]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {

@@ -75,12 +75,13 @@
     NSLog(@"%@",[post objectForKey:@"message"] );
     NSLog(@"************************");
     PostsTableViewCell *cell;
+    static NSString* cellIdentifier = @"postsImageViewCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if ([[post objectForKey:@"type"] isEqualToString:@"photo"]){
         
         static NSString* cellIdentifier = @"postsImageViewCell";
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        //[[(PostImageTableViewCell*)cell image] setHidden:false];
         [[(PostImageTableViewCell*)cell  image] lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
     }else{
         
