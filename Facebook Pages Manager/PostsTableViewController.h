@@ -11,5 +11,5 @@
 @interface PostsTableViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate,
                                                             UIPopoverPresentationControllerDelegate>
 @property(nonatomic, copy) NSDictionary *pageDetails;
-@property(nonatomic, copy) NSArray *posts;
+@property(nonatomic, copy) NSMutableArray *posts;
 @end

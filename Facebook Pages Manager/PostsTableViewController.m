@@ -121,25 +121,44 @@
 }
 
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return [indexPath row]%2==0;
 }
-*/
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]; [self.view addSubview:spinner];
+//    [spinner startAnimating];
+
+    NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
+            [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[post objectForKey:@"id"]]
+                                               parameters: nil
+                                              tokenString:[_pageDetails objectForKey:@"access_token"]
+                                                  version:@"v2.10"
+                                               HTTPMethod:@"DELETE"]
+             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                 if (!error) {
+                     NSLog(@"Post id:%@", result[@"id"]);
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         
+                         //[spinner stopAnimating];
+                         [_posts removeObjectAtIndex:indexPath.row];
+                         [self.tableView deleteRowsAtIndexPaths:@[indexPath, [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+                         
+                     });
+                 }
+             }];
+        }
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -175,7 +194,7 @@
              if (!error) {
                  
                  NSLog(@"%@", result);
-                 _posts = [result valueForKey:@"data"];
+                 _posts = [[result valueForKey:@"data"] mutableCopy];
                  [self.tableView reloadData];
              }
          }];

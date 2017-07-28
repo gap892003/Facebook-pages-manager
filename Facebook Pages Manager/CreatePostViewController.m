@@ -39,7 +39,6 @@ static NSString* placeHolderText = @"Write here";
 }
 */
 
-
 #pragma mark - Textview delegate
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
