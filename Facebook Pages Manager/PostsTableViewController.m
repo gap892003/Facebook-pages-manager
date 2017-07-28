@@ -90,7 +90,22 @@
     
     cell.message.text = [post valueForKey:@"message"];
     cell.viewsContainer.hidden = true;
+    NSDictionary *from = [post objectForKey:@"from"];
+    NSString* fromtext = nil;
     
+    if ( from !=nil && ![[from objectForKey:@"id"] isEqualToString:[_pageDetails objectForKey:@"id"]]){
+     
+        fromtext = [NSString stringWithFormat:@"%@ \u25B6 %@", [from objectForKey:@"name"],
+                    [_pageDetails objectForKey:@"name"]];
+        [cell.fromImage lazyLoadWithId:[from objectForKey:@"id"]];
+    }else{
+        
+        fromtext = [NSString stringWithFormat:@"%@",
+                    [_pageDetails objectForKey:@"name"]];
+        [cell.fromImage lazyLoadWithId:[_pageDetails objectForKey:@"id"]];
+    }
+    
+    cell.from.text = fromtext;
     /// Make a Superclass for both cells
 // if ([post valueForKey:@"views"] != nil){
 //        
@@ -154,7 +169,7 @@
     if ([FBSDKAccessToken currentAccessToken]) {
         
         NSString* pageid =[_pageDetails valueForKey:@"id"];
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/feed"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type",} HTTPMethod:@"GET"]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/feed"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",} HTTPMethod:@"GET"]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  

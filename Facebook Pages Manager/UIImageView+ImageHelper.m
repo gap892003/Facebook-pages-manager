@@ -39,7 +39,6 @@
     });
 }*/
 
-
 -(void)lazyLoadImageForPage: (NSDictionary*) picture{
     
     NSString *url = nil;
@@ -64,6 +63,33 @@
             [self setNeedsDisplay];
         });
     });
+}
+
+-(void) lazyLoadWithId:(NSString*) objectID{
+    
+    self.image = [UIImage imageNamed:@"imageplaceholder.jpg"];
+    
+    if (objectID == nil) return;
+    // make network request here
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                      initWithGraphPath:[NSString stringWithFormat:@"/%@/picture?fields=url&type=small&redirect=0",objectID]
+                                      parameters:nil
+                                      HTTPMethod:@"GET"];
+        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                              id result,
+                                              NSError *error) {
+            if (result == nil || error != nil){
+                return;
+            }
+            
+            NSDictionary *data = [result objectForKey:@"data"];
+            if (data != nil)
+            [self lazyLoadWithUrl:[data objectForKey:@"url"]];
+        }];
+    });
+
 }
 
 @end

@@ -39,6 +39,29 @@ static NSString* placeHolderText = @"Write here";
 }
 */
 
+
+#pragma mark - Textview delegate
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    
+    if (![textView hasText]){
+        [textView setText:placeHolderText];
+        _dirty=NO;
+    }
+    
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    
+    [textView setText:@""];
+    _dirty=YES;
+    return true;
+}
+
+
+
+#pragma mark - Actions
+
 -(IBAction) createPost:(id)sender{
     
     if (!_dirty || ![_textView hasText]) {
@@ -70,22 +93,6 @@ static NSString* placeHolderText = @"Write here";
     }
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView{
-    
-    if (![textView hasText]){
-        [textView setText:placeHolderText];
-        _dirty=NO;
-    }
-
-}
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-
-    [textView setText:@""];
-    _dirty=YES;
-    return true;
-}
-
 -(IBAction) dismissKeyPad:(id)sender{
     [_textView resignFirstResponder];
 }
@@ -93,6 +100,10 @@ static NSString* placeHolderText = @"Write here";
 -(IBAction)dismissSelf:(id)sender{
     
     [[self parentViewController] dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction)schedulePost:(id)sender{
+
 }
 
 @end

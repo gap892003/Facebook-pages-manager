@@ -11,4 +11,5 @@
 @interface UIImageView (ImageHelper)
 -(void)lazyLoadImageForPage: (NSDictionary*) picture;
 -(void) lazyLoadWithUrl:(NSString*) url;
+-(void) lazyLoadWithId:(NSString*) objectID;
 @end

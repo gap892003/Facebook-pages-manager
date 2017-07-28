@@ -12,4 +12,6 @@
 @property(nonatomic,weak) IBOutlet UILabel *views;
 @property(nonatomic,weak) IBOutlet UIView *viewsContainer;
 @property(nonatomic,weak) IBOutlet UILabel *message;
+@property(nonatomic,weak) IBOutlet UILabel *from;
+@property(nonatomic,weak) IBOutlet UIImageView *fromImage;
 @end
