@@ -34,14 +34,15 @@
     self.navigationItem.rightBarButtonItem = item;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPageFeed) name:@"reloadPageFeed" object:nil];
+    [self setTitle:[self.pageDetails valueForKey:@"name"]];
+    if (_pageDetails == nil) return;
+    [self getPageFeed];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-    [self setTitle:[self.pageDetails valueForKey:@"name"]];
-    if (_pageDetails == nil) return;
-    [self getPageFeed];    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +90,8 @@
     
     cell.message.text = [post valueForKey:@"message"];
     cell.viewsContainer.hidden = true;
-  /// Make a Superclass for both cells
+    
+    /// Make a Superclass for both cells
 // if ([post valueForKey:@"views"] != nil){
 //        
 //        cell.viewsContainer.hidden = false;
@@ -173,8 +175,15 @@
     [popover setDelegate:self];
     [self.navigationController presentViewController:posts animated:YES completion:^{
         
+        CreatePostViewController* createCntl= (CreatePostViewController*)[posts topViewController] ;
+        [createCntl setPageId:[_pageDetails objectForKey:@"id"]];
+        [createCntl setPageAccessToken:[_pageDetails objectForKey:@"access_token"]];
     }];
     
 }
 
+//- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController{
+//    
+//    [self getPageFeed];
+//}
 @end

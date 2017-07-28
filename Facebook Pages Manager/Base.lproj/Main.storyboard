@@ -151,6 +151,9 @@
                                                 <rect key="frame" x="290" y="10" width="85" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Post"/>
+                                                <connections>
+                                                    <action selector="createPost:" destination="gmE-Cj-MEQ" eventType="touchDown" id="hHh-0a-pkH"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-12-36e">
                                                 <rect key="frame" x="219" y="10" width="77" height="30"/>

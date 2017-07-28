@@ -10,6 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface CreatePostViewController ()
+@property(nonatomic) BOOL dirty;
 @end
 
 static NSString* placeHolderText = @"Write here";
@@ -20,6 +21,7 @@ static NSString* placeHolderText = @"Write here";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.textView setText:placeHolderText];
+    _dirty=NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,14 +41,30 @@ static NSString* placeHolderText = @"Write here";
 
 -(IBAction) createPost:(id)sender{
     
+    if (!_dirty || ![_textView hasText]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please enter some text!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
         [[[FBSDKGraphRequest alloc]
-          initWithGraphPath:[NSString stringWithFormat:@"%@/feed",_pageId]
+          initWithGraphPath:[NSString stringWithFormat:@"/%@/feed",_pageId]
           parameters: @{ @"message" : _textView.text}
           HTTPMethod:@"POST"]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"Post id:%@", result[@"id"]);
+                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"reloadPageFeed" object:nil]];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     [self dismissSelf:nil];
+                 });
              }
          }];
     }
@@ -56,6 +74,7 @@ static NSString* placeHolderText = @"Write here";
     
     if (![textView hasText]){
         [textView setText:placeHolderText];
+        _dirty=NO;
     }
 
 }
@@ -63,6 +82,7 @@ static NSString* placeHolderText = @"Write here";
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
 
     [textView setText:@""];
+    _dirty=YES;
     return true;
 }
 
