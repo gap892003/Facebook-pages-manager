@@ -90,6 +90,7 @@
     }
     
     cell.message.text = [post valueForKey:@"message"];
+    cell.createdDate.text = [post valueForKey:@"created_time"];
     cell.viewsContainer.hidden = true;
     NSDictionary *from = [post objectForKey:@"from"];
     NSString* fromtext = nil;
