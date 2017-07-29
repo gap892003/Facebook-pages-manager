@@ -16,4 +16,6 @@
 @property(nonatomic,weak) IBOutlet UIImageView *fromImage;
 @property(nonatomic,weak) IBOutlet UILabel *createdDate;
 -(void) loadData:(NSDictionary*) post andPage:(NSDictionary*) pageDetails;
+-(void) deletePost:(NSDictionary*) post forPage:(NSDictionary*)pageDetails
+      andCurrentVC:(UIViewController*)vc successHandler:(void (^)(id result )) successHandler;
 @end

@@ -109,26 +109,17 @@
 
     NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
-            [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[post objectForKey:@"id"]]
-                                               parameters: nil
-                                              tokenString:[_pageDetails objectForKey:@"access_token"]
-                                                  version:@"v2.10"
-                                               HTTPMethod:@"DELETE"]
-             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                 if (!error) {
-                     NSLog(@"Post id:%@", result[@"id"]);
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         
-                         //[spinner stopAnimating];
-                         [_posts removeObjectAtIndex:indexPath.row];
-                         [self.tableView deleteRowsAtIndexPaths:@[indexPath, [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
-                         
-                     });
-                 }
-             }];
-        }
+ 
+        PostsTableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [cell deletePost:post forPage:_pageDetails andCurrentVC:self successHandler:^(id result) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //[spinner stopAnimating];
+                [_posts removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath, [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+                
+            }); 
+        }];
     }
 }
 

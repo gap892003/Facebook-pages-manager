@@ -8,6 +8,7 @@
 
 #import "PostsTableViewCell.h"
 #import "UIImageView+ImageHelper.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation PostsTableViewCell
 
@@ -20,6 +21,40 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void) deletePost:(NSDictionary*) post forPage:(NSDictionary*)pageDetails
+      andCurrentVC:(UIViewController*)vc successHandler:(void (^)(id result )) successHandler{
+    
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[post objectForKey:@"id"]]
+                                           parameters: nil
+                                          tokenString:[pageDetails objectForKey:@"access_token"]
+                                              version:@"v2.10"
+                                           HTTPMethod:@"DELETE"]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSLog(@"Deleted Post id:%@", result[@"id"]);
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     
+                     successHandler(result);
+                 });
+             }else{
+                 
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                    message:@"Delete failed!"
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                     
+                     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                           handler:^(UIAlertAction * action) {}];
+                     
+                     [alert addAction:defaultAction];
+                     [vc presentViewController:alert animated:YES completion:nil];
+                 });
+             }
+         }];
+    }
 }
 
 -(void) loadData:(NSDictionary*) post andPage:(NSDictionary*) pageDetails{
