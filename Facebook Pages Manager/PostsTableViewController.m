@@ -12,6 +12,7 @@
 #import "PostsTableViewCell.h"
 #import "UIImageView+ImageHelper.h"
 #import "CreatePostViewController.h"
+#import "ScheduledPostsViewController.h"
 
 @interface PostsTableViewController ()
 
@@ -63,68 +64,32 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if ([indexPath row] == 0){
+    
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scheduled"];
+        return cell;
+    }
+    
     if ([indexPath row]%2!=0){
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"blank"];
         return cell;
     }
     
-    NSDictionary *post = [_posts objectAtIndex:[indexPath row]/2];
-    NSLog(@"************************");
-    NSLog(@"%@",[post objectForKey:@"type"] );
-    NSLog(@"%@",[post objectForKey:@"message"] );
-    NSLog(@"************************");
+    NSDictionary *post = [_posts objectAtIndex:([indexPath row]-1)/2];
+
     PostsTableViewCell *cell;
-    static NSString* cellIdentifier = @"postsImageViewCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+    NSString* cellIdentifier= nil ;
     if ([[post objectForKey:@"type"] isEqualToString:@"photo"]){
         
-        static NSString* cellIdentifier = @"postsImageViewCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        [[(PostImageTableViewCell*)cell  image] lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
+        cellIdentifier = @"postsImageViewCell";
     }else{
         
-        static NSString* cellIdentifier = @"postsTextViewCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        cellIdentifier = @"postsTextViewCell";
     }
     
-    cell.message.text = [post valueForKey:@"message"];
-    
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH:mm:ssZ"];
-    NSDate* date = [dateFormatter dateFromString:[post valueForKey:@"created_time"]];
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH:mm:ss"];
-
-    cell.createdDate.text = [dateFormatter stringFromDate:date];
-    cell.viewsContainer.hidden = true;
-    NSDictionary *from = [post objectForKey:@"from"];
-    NSString* fromtext = nil;
-    
-    if ( from !=nil && ![[from objectForKey:@"id"] isEqualToString:[_pageDetails objectForKey:@"id"]]){
-     
-        fromtext = [NSString stringWithFormat:@"%@ \u25B6 %@", [from objectForKey:@"name"],
-                    [_pageDetails objectForKey:@"name"]];
-        [cell.fromImage lazyLoadWithId:[from objectForKey:@"id"]];
-    }else{
-        
-        fromtext = [NSString stringWithFormat:@"%@",
-                    [_pageDetails objectForKey:@"name"]];
-        [cell.fromImage lazyLoadWithId:[_pageDetails objectForKey:@"id"]];
-    }
-    
-    cell.from.text = fromtext;
-    /// Make a Superclass for both cells
-// if ([post valueForKey:@"views"] != nil){
-//        
-//        cell.viewsContainer.hidden = false;
-//        
-//    }else{
-//    
-//        cell.viewsContainer.hidden = true;
-//    }
-
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    [cell loadData:post andPage:_pageDetails];
     return cell;
 }
 
@@ -182,15 +147,24 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"toScheduledPosts"])
+    {
+        ScheduledPostsViewController *vc = [segue destinationViewController];
+        
+        //set page ID here
+        [vc setPageDetails:_pageDetails];
+    }
 }
-*/
+
+#pragma mark - User functions
 
 -(void) getPageFeed{
 

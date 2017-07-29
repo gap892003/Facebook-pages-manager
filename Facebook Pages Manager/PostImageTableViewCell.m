@@ -7,6 +7,7 @@
 //
 
 #import "PostImageTableViewCell.h"
+#import "UIImageView+ImageHelper.h"
 
 @implementation PostImageTableViewCell
 
@@ -21,4 +22,8 @@
     // Configure the view for the selected state
 }
 
+-(void) loadData:(NSDictionary*) post andPage:(NSDictionary*) _pageDetails{
+    [super loadData:post andPage:_pageDetails];
+    [[self  image] lazyLoadWithUrl:[post objectForKey:@"full_picture"]];
+}
 @end

@@ -28,6 +28,7 @@
 		F4BD1F1E1F29923400C7A82D /* Post.png in Resources */ = {isa = PBXBuildFile; fileRef = F4BD1F1D1F29923400C7A82D /* Post.png */; };
 		F4BD1F211F29D2AC00C7A82D /* UILabel+ViewCount.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */; };
 		F4BD1F241F2ACB3C00C7A82D /* CreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */; };
+		F4BD1F271F2C536900C7A82D /* ScheduledPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD1F261F2C536900C7A82D /* ScheduledPostsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ViewCount.m"; sourceTree = "<group>"; };
 		F4BD1F221F2ACB3C00C7A82D /* CreatePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatePostViewController.h; sourceTree = "<group>"; };
 		F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatePostViewController.m; sourceTree = "<group>"; };
+		F4BD1F251F2C536900C7A82D /* ScheduledPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledPostsViewController.h; sourceTree = "<group>"; };
+		F4BD1F261F2C536900C7A82D /* ScheduledPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledPostsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +215,8 @@
 				F4BD1F051F25DD8100C7A82D /* PagesTableViewController.m */,
 				F4BD1F221F2ACB3C00C7A82D /* CreatePostViewController.h */,
 				F4BD1F231F2ACB3C00C7A82D /* CreatePostViewController.m */,
+				F4BD1F251F2C536900C7A82D /* ScheduledPostsViewController.h */,
+				F4BD1F261F2C536900C7A82D /* ScheduledPostsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -376,6 +381,7 @@
 				F4BD1F1C1F287BDF00C7A82D /* PostsTableViewCell.m in Sources */,
 				F4BD1F211F29D2AC00C7A82D /* UILabel+ViewCount.m in Sources */,
 				F40E07571F20774200EC1C2D /* main.m in Sources */,
+				F4BD1F271F2C536900C7A82D /* ScheduledPostsViewController.m in Sources */,
 				F4BD1F031F23437500C7A82D /* PostsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

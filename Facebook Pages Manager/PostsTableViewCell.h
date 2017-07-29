@@ -15,4 +15,5 @@
 @property(nonatomic,weak) IBOutlet UILabel *from;
 @property(nonatomic,weak) IBOutlet UIImageView *fromImage;
 @property(nonatomic,weak) IBOutlet UILabel *createdDate;
+-(void) loadData:(NSDictionary*) post andPage:(NSDictionary*) pageDetails;
 @end
