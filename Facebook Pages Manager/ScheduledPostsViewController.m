@@ -8,6 +8,7 @@
 
 #import "ScheduledPostsViewController.h"
 #import "PostsTableViewCell.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface ScheduledPostsViewController ()
 @property (nonatomic,copy) NSArray *posts;
@@ -18,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 500;
+    [self getScheduledPosts];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,22 +40,16 @@
 */
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0 ;
+    return [_posts count]*2;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if ([indexPath row] == 0){
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"scheduled"];
-        return cell;
-    }
-    
     if ([indexPath row]%2!=0){
         
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"blank"];
@@ -74,5 +72,26 @@
     [cell loadData:post andPage:_pageDetails];
     return cell;
 }
+
+-(void) getScheduledPosts{
+    
+    if ([FBSDKAccessToken currentAccessToken]) {
+        
+        NSString* pageid =[_pageDetails valueForKey:@"id"];
+        
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/promotable_posts"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"is_published":@"false"}
+            tokenString:[_pageDetails objectForKey:@"access_token"] version:@"v2.10"
+                                           HTTPMethod:@"GET"]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 
+                 NSLog(@"%@", result);
+                 _posts = [[result valueForKey:@"data"] mutableCopy];
+                 [self.tableView reloadData];
+             }
+         }];
+    }
+}
+
 
 @end

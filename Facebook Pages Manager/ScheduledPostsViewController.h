@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ScheduledPostsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic,weak)UITableView *tableView;
+@property(nonatomic,weak) IBOutlet UITableView *tableView;
 @property (nonatomic,weak) NSDictionary *pageDetails;
 @end
