@@ -321,21 +321,24 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="postsImageViewCell" rowHeight="500" id="D91-ek-0By" customClass="PostImageTableViewCell">
-                                <rect key="frame" x="0.0" y="195.5" width="375" height="500"/>
+                                <rect key="frame" x="0.0" y="196" width="375" height="500"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D91-ek-0By" id="iL6-AC-UuN">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRL-Gd-UDT">
-                                            <rect key="frame" x="5" y="45" width="365" height="110"/>
+                                            <rect key="frame" x="5" y="59" width="365" height="96"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="96" id="s3x-1I-KF6"/>
+                                            </constraints>
                                             <string key="text">Some random post, I am testing Facebook Some random post, I am testing Facebook Some random post, I am testing Facebook Some random post, I am testing Facebook Some random post, I am testing Facebook Some random post, I am testing Facebook</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEO-Ud-pzb">
-                                            <rect key="frame" x="252" y="504" width="118" height="31"/>
+                                            <rect key="frame" x="252" y="534" width="118" height="31"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Views" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFM-WF-yzw">
                                                     <rect key="frame" x="14" y="5" width="46" height="21"/>
@@ -359,13 +362,13 @@
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="imageplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Jyb-og-nnb">
-                                            <rect key="frame" x="0.0" y="160" width="375" height="375"/>
+                                            <rect key="frame" x="0.0" y="190" width="375" height="375"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="375" id="1YI-jo-JI1"/>
                                                 <constraint firstAttribute="width" constant="375" id="fU6-WV-PRa"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-ZH-hxs">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-ZH-hxs">
                                             <rect key="frame" x="30" y="5" width="340" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -378,28 +381,39 @@
                                                 <constraint firstAttribute="width" constant="20" id="WkB-Xw-lvW"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZf-Wk-Y70">
+                                            <rect key="frame" x="30" y="31" width="332" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dRL-Gd-UDT" firstAttribute="centerX" secondItem="iL6-AC-UuN" secondAttribute="centerX" id="4Dp-Kd-t8y"/>
                                         <constraint firstAttribute="trailing" secondItem="vEO-Ud-pzb" secondAttribute="trailing" constant="5" id="Emb-x3-zaZ"/>
-                                        <constraint firstItem="Jyb-og-nnb" firstAttribute="top" secondItem="dRL-Gd-UDT" secondAttribute="bottom" constant="5" id="Emi-Sv-Ruo"/>
+                                        <constraint firstItem="Jyb-og-nnb" firstAttribute="top" secondItem="dRL-Gd-UDT" secondAttribute="bottom" constant="35" id="Emi-Sv-Ruo"/>
                                         <constraint firstItem="l6O-ZH-hxs" firstAttribute="top" secondItem="iL6-AC-UuN" secondAttribute="top" constant="5" id="Etf-hV-gV8"/>
-                                        <constraint firstItem="Jyb-og-nnb" firstAttribute="top" secondItem="dRL-Gd-UDT" secondAttribute="bottom" constant="5" id="FGZ-KV-dRZ"/>
+                                        <constraint firstItem="Jyb-og-nnb" firstAttribute="top" secondItem="dRL-Gd-UDT" secondAttribute="bottom" constant="35" id="FGZ-KV-dRZ"/>
                                         <constraint firstItem="l6O-ZH-hxs" firstAttribute="leading" secondItem="njU-X4-E00" secondAttribute="trailing" constant="5" id="FHV-tj-Jtx"/>
-                                        <constraint firstItem="dRL-Gd-UDT" firstAttribute="top" secondItem="iL6-AC-UuN" secondAttribute="top" constant="45" id="JCc-cc-gaH"/>
+                                        <constraint firstItem="dRL-Gd-UDT" firstAttribute="top" secondItem="wZf-Wk-Y70" secondAttribute="bottom" constant="5" id="IUI-z5-P0P"/>
                                         <constraint firstAttribute="trailing" secondItem="l6O-ZH-hxs" secondAttribute="trailing" constant="5" id="JlV-l1-nNe"/>
+                                        <constraint firstItem="wZf-Wk-Y70" firstAttribute="leading" secondItem="iL6-AC-UuN" secondAttribute="leadingMargin" constant="22" id="MBF-0X-LV3"/>
                                         <constraint firstItem="njU-X4-E00" firstAttribute="top" secondItem="iL6-AC-UuN" secondAttribute="top" constant="5" id="NeI-eQ-8i5"/>
                                         <constraint firstAttribute="trailing" secondItem="dRL-Gd-UDT" secondAttribute="trailing" constant="5" id="Q6J-iq-m6K"/>
-                                        <constraint firstAttribute="bottom" secondItem="Jyb-og-nnb" secondAttribute="bottom" constant="-35" id="Vnv-Vb-NOT"/>
+                                        <constraint firstAttribute="bottom" secondItem="Jyb-og-nnb" secondAttribute="bottom" constant="-65" id="Vnv-Vb-NOT"/>
+                                        <constraint firstItem="wZf-Wk-Y70" firstAttribute="top" secondItem="l6O-ZH-hxs" secondAttribute="bottom" constant="5" id="WbG-0P-v21"/>
                                         <constraint firstItem="Jyb-og-nnb" firstAttribute="leading" secondItem="iL6-AC-UuN" secondAttribute="leading" id="Wkq-wu-9Qs"/>
+                                        <constraint firstItem="wZf-Wk-Y70" firstAttribute="top" secondItem="l6O-ZH-hxs" secondAttribute="bottom" constant="5" id="cxI-UJ-UOo"/>
                                         <constraint firstItem="Jyb-og-nnb" firstAttribute="centerX" secondItem="iL6-AC-UuN" secondAttribute="centerX" id="kvl-Zz-sRx"/>
-                                        <constraint firstAttribute="bottom" secondItem="vEO-Ud-pzb" secondAttribute="bottom" constant="-35" id="oUO-mX-dOh"/>
+                                        <constraint firstAttribute="bottom" secondItem="vEO-Ud-pzb" secondAttribute="bottom" constant="-65" id="oUO-mX-dOh"/>
                                         <constraint firstItem="njU-X4-E00" firstAttribute="leading" secondItem="iL6-AC-UuN" secondAttribute="leading" constant="5" id="oZh-2r-pc3"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wZf-Wk-Y70" secondAttribute="trailing" constant="5" id="q6e-kf-cF5"/>
                                         <constraint firstItem="dRL-Gd-UDT" firstAttribute="leading" secondItem="iL6-AC-UuN" secondAttribute="leading" constant="5" id="rUF-oM-ROu"/>
                                         <constraint firstAttribute="trailing" secondItem="Jyb-og-nnb" secondAttribute="trailing" id="wTb-Gh-ugg"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="createdDate" destination="wZf-Wk-Y70" id="7Ns-aj-Me9"/>
                                     <outlet property="from" destination="l6O-ZH-hxs" id="lkV-NZ-kcq"/>
                                     <outlet property="fromImage" destination="njU-X4-E00" id="Pau-cF-uzU"/>
                                     <outlet property="image" destination="Jyb-og-nnb" id="z7c-sf-FBa"/>
