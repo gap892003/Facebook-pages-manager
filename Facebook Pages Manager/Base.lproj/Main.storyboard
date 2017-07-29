@@ -134,7 +134,6 @@
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="86e-ig-FrO">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="rSp-KA-bXj"/>
                                         </constraints>
@@ -192,6 +191,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Create Post" id="2SV-YC-GS5">
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="uUB-Gs-CL9">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="dismissSelf:" destination="gmE-Cj-MEQ" id="t1i-dq-065"/>
                             </connections>
@@ -471,9 +471,10 @@
             <objects>
                 <navigationController restorationIdentifier="createPosts" storyboardIdentifier="createPosts" automaticallyAdjustsScrollViewInsets="NO" id="fPM-Pf-D24" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qfz-d4-jNO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Qfz-d4-jNO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.34025525760000003" green="0.47189506539999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

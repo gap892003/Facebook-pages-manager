@@ -90,7 +90,14 @@
     }
     
     cell.message.text = [post valueForKey:@"message"];
-    cell.createdDate.text = [post valueForKey:@"created_time"];
+    
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH:mm:ssZ"];
+    NSDate* date = [dateFormatter dateFromString:[post valueForKey:@"created_time"]];
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH:mm:ss"];
+
+    cell.createdDate.text = [dateFormatter stringFromDate:date];
     cell.viewsContainer.hidden = true;
     NSDictionary *from = [post objectForKey:@"from"];
     NSString* fromtext = nil;

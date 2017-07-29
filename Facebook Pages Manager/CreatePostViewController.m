@@ -20,6 +20,7 @@ static NSString* placeHolderText = @"Write here";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.automaticallyAdjustsScrollViewInsets = false;
     [self.textView setText:placeHolderText];
     _dirty=NO;
 }
