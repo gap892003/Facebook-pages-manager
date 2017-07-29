@@ -23,13 +23,12 @@
     // Configure the view for the selected state
 }
 
--(void) deletePost:(NSDictionary*) post forPage:(NSDictionary*)pageDetails
-      andCurrentVC:(UIViewController*)vc successHandler:(void (^)(id result )) successHandler{
+-(void) deletePostForCurrentVC:(UIViewController*)vc successHandler:(void (^)(id result )) successHandler{
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[post objectForKey:@"id"]]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[self.post objectForKey:@"id"]]
                                            parameters: nil
-                                          tokenString:[pageDetails objectForKey:@"access_token"]
+                                          tokenString:[self.pageDetails objectForKey:@"access_token"]
                                               version:@"v2.10"
                                            HTTPMethod:@"DELETE"]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
@@ -59,8 +58,9 @@
 
 -(void) loadData:(NSDictionary*) post andPage:(NSDictionary*) pageDetails{
 
+    self.post = post;
+    self.pageDetails = pageDetails;
     self.message.text = [post valueForKey:@"message"];
-    
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH:mm:ssZ"];
     NSDate* date = [dateFormatter dateFromString:[post valueForKey:@"created_time"]];

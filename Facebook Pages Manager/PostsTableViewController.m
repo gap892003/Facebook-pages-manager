@@ -58,7 +58,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_posts count]*2 ;
+    return [_posts count]*2 + 1;
 }
 
 
@@ -107,15 +107,15 @@
 //    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]; [self.view addSubview:spinner];
 //    [spinner startAnimating];
 
-    NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
+    //NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
  
         PostsTableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [cell deletePost:post forPage:_pageDetails andCurrentVC:self successHandler:^(id result) {
+        [cell deletePostForCurrentVC:self successHandler:^(id result) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 //[spinner stopAnimating];
-                [_posts removeObjectAtIndex:indexPath.row];
+                [_posts removeObject:cell.post];
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath, [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
                 
             }); 
