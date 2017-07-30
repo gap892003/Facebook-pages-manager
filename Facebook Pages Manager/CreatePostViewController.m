@@ -11,6 +11,9 @@
 
 @interface CreatePostViewController ()
 @property(nonatomic) BOOL dirty;
+@property(nonatomic) UIDatePicker* picker;
+@property(nonatomic) NSDateFormatter *dateFormatter;
+@property(nonatomic) NSTimeInterval timeToPost;
 @end
 
 static NSString* placeHolderText = @"Write here";
@@ -23,6 +26,18 @@ static NSString* placeHolderText = @"Write here";
     self.automaticallyAdjustsScrollViewInsets = false;
     [self.textView setText:placeHolderText];
     _dirty=NO;
+    
+    _picker = [[UIDatePicker alloc] init];
+    _picker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _picker.datePickerMode = UIDatePickerModeDateAndTime;
+    
+    [_picker addTarget:self action:@selector(onDatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    CGSize pickerSize = [_picker sizeThatFits:CGSizeZero];
+    _picker.frame = CGRectMake(0, [self.view frame].size.height - pickerSize.height, [self.view frame].size.width, pickerSize.height);
+    [self.view addSubview:_picker];
+    _picker.hidden = YES;
+     _dateFormatter = [[NSDateFormatter alloc] init];
+    [_dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH:mm"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +93,7 @@ static NSString* placeHolderText = @"Write here";
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"manage_pages"]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/feed",_pageId]
-          parameters: @{ @"message" : _textView.text}
+          parameters: [self getParameters]
           tokenString: _pageAccessToken
           version:@"v2.10"
           HTTPMethod:@"POST"]
@@ -95,8 +110,26 @@ static NSString* placeHolderText = @"Write here";
     }
 }
 
+-(NSDictionary*) getParameters{
+
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary: @{ @"message" : _textView.text}];
+    NSNumber *timeToPostInt = [NSNumber numberWithDouble:_timeToPost];
+    
+    if (_timeToPost < 0 ){
+    
+        [params setObject:timeToPostInt forKey:@"backdated_time"];
+    }else if (_timeToPost > 0){
+        
+        [params setObject:timeToPostInt forKey:@"scheduled_publish_time"];
+        [params setObject:@"false" forKey:@"published"];
+    }
+    
+    return params;
+}
+
 -(IBAction) dismissKeyPad:(id)sender{
     [_textView resignFirstResponder];
+    [_picker setHidden:YES];
 }
 
 -(IBAction)dismissSelf:(id)sender{
@@ -110,12 +143,27 @@ static NSString* placeHolderText = @"Write here";
 
 -(IBAction)selectTime:(id)sender{
 
+    [_picker setHidden:NO];
 }
 
 -(void)onDatePickerValueChanged:(UIDatePicker*) picker{
 
-    if (![picker.date isEqualToDate:[NSDate date]]){
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeNow = [currentDate timeIntervalSince1970];
+    NSDate* selectedDate = picker.date;
+    NSTimeInterval timeSelected = [selectedDate timeIntervalSince1970];
+    NSTimeInterval diff = timeSelected - timeNow;
+    _timeToPost = timeSelected;
+    
+    if(diff < 60 && diff > -60){
         
+        [_postButton setTitle:@"Post" forState:UIControlStateNormal];
+        _timeToPost = 0;
+    }else if (diff < 0){
+        
+        [_postButton setTitle:@"Backdate" forState:UIControlStateNormal];
+    }else if (diff > 0){
+    
         [_postButton setTitle:@"Schedule" forState:UIControlStateNormal];
     }
 }
