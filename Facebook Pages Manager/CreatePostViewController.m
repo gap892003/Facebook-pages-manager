@@ -108,4 +108,16 @@ static NSString* placeHolderText = @"Write here";
 
 }
 
+-(IBAction)selectTime:(id)sender{
+
+}
+
+-(void)onDatePickerValueChanged:(UIDatePicker*) picker{
+
+    if (![picker.date isEqualToDate:[NSDate date]]){
+        
+        [_postButton setTitle:@"Schedule" forState:UIControlStateNormal];
+    }
+}
+
 @end

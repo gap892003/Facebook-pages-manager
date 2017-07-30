@@ -173,6 +173,9 @@
                                                 <state key="normal" title="▼">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="selectTime:" destination="gmE-Cj-MEQ" eventType="touchUpInside" id="o0F-Lb-iAt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,6 +212,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="postButton" destination="7GV-UB-VVE" id="VeG-53-jDj"/>
                         <outlet property="textView" destination="86e-ig-FrO" id="uma-VL-EuI"/>
                     </connections>
                 </viewController>

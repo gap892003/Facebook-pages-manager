@@ -11,8 +11,10 @@
 @interface CreatePostViewController : UIViewController<UITextViewDelegate>
 @property (nonatomic,weak) IBOutlet UITextView *textView;
 @property (nonatomic,weak) IBOutlet UILabel *placeholder;
+@property (nonatomic,weak) IBOutlet UIButton *postButton;
 @property(nonatomic,copy) NSString *pageId;
 @property(nonatomic,copy) NSString *pageAccessToken;
 -(IBAction) dismissKeyPad:(id)sender;
 -(IBAction)dismissSelf:(id)sender;
+-(IBAction)selectTime:(id)sender;
 @end
