@@ -17,7 +17,8 @@
 @end
 
 static NSString* placeHolderText = @"Write here";
-
+static NSString* backdate = @"Backdate";
+static NSString* scheduleTitle = @"Schedule";
 @implementation CreatePostViewController
 
 - (void)viewDidLoad {
@@ -115,10 +116,10 @@ static NSString* placeHolderText = @"Write here";
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary: @{ @"message" : _textView.text}];
     NSNumber *timeToPostInt = [NSNumber numberWithDouble:_timeToPost];
     
-    if (_timeToPost < 0 ){
+    if ([[[_postButton titleLabel] text] isEqualToString:backdate]){
     
         [params setObject:timeToPostInt forKey:@"backdated_time"];
-    }else if (_timeToPost > 0){
+    }else if ([[[_postButton titleLabel] text] isEqualToString:scheduleTitle]){
         
         [params setObject:timeToPostInt forKey:@"scheduled_publish_time"];
         [params setObject:@"false" forKey:@"published"];
@@ -161,10 +162,10 @@ static NSString* placeHolderText = @"Write here";
         _timeToPost = 0;
     }else if (diff < 0){
         
-        [_postButton setTitle:@"Backdate" forState:UIControlStateNormal];
+        [_postButton setTitle:backdate forState:UIControlStateNormal];
     }else if (diff > 0){
     
-        [_postButton setTitle:@"Schedule" forState:UIControlStateNormal];
+        [_postButton setTitle:scheduleTitle forState:UIControlStateNormal];
     }
 }
 
