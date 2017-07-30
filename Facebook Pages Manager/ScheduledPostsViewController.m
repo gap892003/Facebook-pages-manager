@@ -11,7 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface ScheduledPostsViewController ()
-@property (nonatomic,copy) NSArray *posts;
+@property (nonatomic,copy) NSMutableArray *posts;
 @end
 
 @implementation ScheduledPostsViewController
@@ -93,5 +93,32 @@
     }
 }
 
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return [indexPath row]%2==0;
+}
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge]; [self.view addSubview:spinner];
+    //    [spinner startAnimating];
+    
+    //NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        PostsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        [cell deletePostForCurrentVC:self successHandler:^(id result) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //[spinner stopAnimating];
+                [_posts removeObject:cell.post];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath, [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationFade];
+                
+            });
+        }];
+    }
+}
 
 @end

@@ -53,11 +53,13 @@
 
     self.image = [UIImage imageNamed:@"imageplaceholder.jpg"];
     if (url == nil ) return;
+    if ([self loadCachedImage:url]) return;
     // make network request here
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
         if (image == nil) return;
+        [self saveImage:image url:url];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setImage:image];
             [self setNeedsDisplay];
@@ -90,6 +92,39 @@
         }];
     });
 
+}
+
+-(BOOL) loadCachedImage: (NSString*) url{
+
+    NSString *imagePath = [self getImagePath:url];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath:imagePath]){
+        self.image = [UIImage imageWithContentsOfFile:imagePath];
+        return true;
+    }
+    
+    return false;
+}
+
+-(void) saveImage:(UIImage*) image url:(NSString*) url{
+    
+    NSString* imagePath = [self getImagePath:url];
+    // lowest compression quality
+    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+    if (![imageData writeToFile:imagePath atomically:YES]){
+        NSLog(@"Writing image to cache failed");
+    }
+}
+
+-(NSString*) getImagePath:(NSString*) url{
+
+    NSArray* libraryDirs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *libraryDir = [libraryDirs objectAtIndex:0];
+//    NSString *folder = [libraryDir stringByAppendingPathComponent:@"Caches"];
+    NSUInteger hashVal = [url hash];
+    NSString *imagePath = [libraryDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%lu.jpg",(unsigned long)hashVal]];
+    return imagePath;
 }
 
 @end

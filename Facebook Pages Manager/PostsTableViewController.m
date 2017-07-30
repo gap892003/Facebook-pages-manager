@@ -110,7 +110,7 @@
     //NSDictionary *post = [_posts objectAtIndex:[indexPath row]];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
  
-        PostsTableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        PostsTableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         [cell deletePostForCurrentVC:self successHandler:^(id result) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 

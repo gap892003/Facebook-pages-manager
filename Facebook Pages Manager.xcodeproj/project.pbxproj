@@ -153,7 +153,7 @@
 				F40E07691F20774200EC1C2D /* Info.plist */,
 				F40E07611F20774200EC1C2D /* Facebook_Pages_Manager.xcdatamodeld */,
 				F40E07551F20774200EC1C2D /* Supporting Files */,
-				F4BD1F0D1F271CD600C7A82D /* TableViewCells */,
+				F4BD1F321F2C844800C7A82D /* UI Components */,
 			);
 			path = "Facebook Pages Manager";
 			sourceTree = "<group>";
@@ -230,6 +230,14 @@
 				F4BD1F201F29D2AC00C7A82D /* UILabel+ViewCount.m */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		F4BD1F321F2C844800C7A82D /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				F4BD1F0D1F271CD600C7A82D /* TableViewCells */,
+			);
+			name = "UI Components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
