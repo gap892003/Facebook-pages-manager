@@ -121,7 +121,6 @@
 
     NSArray* libraryDirs = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *libraryDir = [libraryDirs objectAtIndex:0];
-//    NSString *folder = [libraryDir stringByAppendingPathComponent:@"Caches"];
     NSUInteger hashVal = [url hash];
     NSString *imagePath = [libraryDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%lu.jpg",(unsigned long)hashVal]];
     return imagePath;

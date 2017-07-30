@@ -12,8 +12,8 @@
 @implementation UILabel (ViewCount)
 
 -(void)updateViewCount:(NSString*) objectID{
-
-    self.text = 0;
+    
+    self.text = @"-";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
     });

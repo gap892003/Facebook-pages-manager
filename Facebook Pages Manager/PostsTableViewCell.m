@@ -25,6 +25,11 @@
 
 -(void) deletePostForCurrentVC:(UIViewController*)vc successHandler:(void (^)(id result )) successHandler{
     
+//    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    spinner.center = vc.view.center;
+//    [((UITableViewController*)vc).tableView addSubview:spinner];
+//    [spinner startAnimating];
+    
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[self.post objectForKey:@"id"]]
                                            parameters: nil
@@ -32,15 +37,16 @@
                                               version:@"v2.10"
                                            HTTPMethod:@"DELETE"]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             if (!error) {
-                 NSLog(@"Deleted Post id:%@", result[@"id"]);
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                     
-                     successHandler(result);
-                 });
-             }else{
+             
+             dispatch_async(dispatch_get_main_queue(), ^{
                  
-                 dispatch_async(dispatch_get_main_queue(), ^{
+//                 [spinner stopAnimating];
+//                 [spinner removeFromSuperview];
+                 if (!error) {
+                     NSLog(@"Deleted Post id:%@", result[@"id"]);
+                     successHandler(result);
+                 }else{
+                     
                      UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
                                                                                     message:@"Delete failed!"
                                                                              preferredStyle:UIAlertControllerStyleAlert];
@@ -50,8 +56,8 @@
                      
                      [alert addAction:defaultAction];
                      [vc presentViewController:alert animated:YES completion:nil];
-                 });
-             }
+                 }
+             });
          }];
     }
 }
