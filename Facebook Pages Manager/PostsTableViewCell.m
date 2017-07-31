@@ -9,6 +9,7 @@
 #import "PostsTableViewCell.h"
 #import "UIImageView+ImageHelper.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "UILabel+ViewCount.h"
 
 @implementation PostsTableViewCell
 
@@ -74,7 +75,7 @@
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH:mm:ss"];
     
     self.createdDate.text = [dateFormatter stringFromDate:date];
-    self.viewsContainer.hidden = true;
+//    self.viewsContainer.hidden = true;
     NSDictionary *from = [post objectForKey:@"from"];
     NSString* fromtext = nil;
     
@@ -91,6 +92,7 @@
     }
     
     self.from.text = fromtext;
+    [self.views updateViewCount:[post objectForKey:@"id"]];
 }
 
 @end

@@ -30,7 +30,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 500;
+    self.tableView.estimatedRowHeight = 531;
     UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
     self.navigationItem.rightBarButtonItem = item;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

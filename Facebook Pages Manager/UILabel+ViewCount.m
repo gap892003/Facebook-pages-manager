@@ -14,10 +14,22 @@
 -(void)updateViewCount:(NSString*) objectID{
     
     self.text = @"-";
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-    });
+    
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/insights/post_impressions/lifetime",objectID] parameters:nil HTTPMethod:@"GET"] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 
+        NSArray* data = [result objectForKey:@"data"];
+        if (data != nil && [data count] > 0) {
+            NSDictionary* dataVal = [data objectAtIndex:0];
+            NSArray *values = [dataVal objectForKey:@"values"];
+            NSDictionary *valuesDict = [values objectAtIndex:0];
+            NSNumber* value = [valuesDict objectForKey:@"value"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.text = [value stringValue];
+            });
+        }
+    }];
 }
 
 @end
