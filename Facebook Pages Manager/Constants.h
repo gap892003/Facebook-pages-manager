@@ -20,6 +20,7 @@ static NSString* const feedPath = @"/feed";
 static NSString* const pageFeedPath = @"/%@/feed";
 static NSString* const insights_postImpressions = @"%@/insights/post_impressions/lifetime";
 static NSString* const promotablePostsPath = @"/promotable_posts";
+static NSString* const pictureRequestPath = @"/%@/picture?fields=url&type=small&redirect=0";
 
 #pragma mark - RequestParams
 #define FEED_PARAMS @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",}
@@ -40,6 +41,10 @@ static NSString* const accessTokenKey = @"access_token";
 static NSString* const pictureKey = @"picture";
 static NSString* const valuesKey = @"values";
 static NSString* const valueKey = @"value";
+static NSString* const urlKey = @"url";
+static NSString* const messageKey = @"message";
+static NSString* const fromKey = @"from";
+static NSString* const createdTimeKey = @"created_time";
 
 #pragma mark - HTTPMethods
 static NSString* const HTTP_GET = @"GET";
@@ -52,6 +57,7 @@ static NSString* const photoPost = @"photo";
 
 #pragma mark - PERMISSIONS
 static NSString* const managePages = @"manage_pages";
+static NSString* const publishPages = @"publish_pages";
 
 #pragma mark - Notifications
 static NSString* const reloadPageNotification = @"reloadPageFeed";

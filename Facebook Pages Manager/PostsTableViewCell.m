@@ -10,6 +10,7 @@
 #import "UIImageView+ImageHelper.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "UILabel+ViewCount.h"
+#import "Constants.h"
 
 @implementation PostsTableViewCell
 
@@ -31,12 +32,12 @@
 //    [((UITableViewController*)vc).tableView addSubview:spinner];
 //    [spinner startAnimating];
     
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_pages"]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[self.post objectForKey:@"id"]]
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:publishPages]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@",[self.post objectForKey:idKey]]
                                            parameters: nil
-                                          tokenString:[self.pageDetails objectForKey:@"access_token"]
-                                              version:@"v2.10"
-                                           HTTPMethod:@"DELETE"]
+                                          tokenString:[self.pageDetails objectForKey:accessTokenKey]
+                                              version:graphAPIVersion
+                                           HTTPMethod:HTTP_DELETE]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              
              dispatch_async(dispatch_get_main_queue(), ^{
@@ -44,7 +45,7 @@
 //                 [spinner stopAnimating];
 //                 [spinner removeFromSuperview];
                  if (!error) {
-                     NSLog(@"Deleted Post id:%@", result[@"id"]);
+                     NSLog(@"Deleted Post id:%@", result[idKey]);
                      successHandler(result);
                  }else{
                      
@@ -67,32 +68,32 @@
 
     self.post = post;
     self.pageDetails = pageDetails;
-    self.message.text = [post valueForKey:@"message"];
+    self.message.text = [post valueForKey:messageKey];
     NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH:mm:ssZ"];
-    NSDate* date = [dateFormatter dateFromString:[post valueForKey:@"created_time"]];
+    NSDate* date = [dateFormatter dateFromString:[post valueForKey:createdTimeKey]];
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH:mm:ss"];
     
     self.createdDate.text = [dateFormatter stringFromDate:date];
 //    self.viewsContainer.hidden = true;
-    NSDictionary *from = [post objectForKey:@"from"];
+    NSDictionary *from = [post objectForKey:fromKey];
     NSString* fromtext = nil;
     
-    if ( from !=nil && ![[from objectForKey:@"id"] isEqualToString:[pageDetails objectForKey:@"id"]]){
+    if ( from !=nil && ![[from objectForKey:idKey] isEqualToString:[pageDetails objectForKey:idKey]]){
         
-        fromtext = [NSString stringWithFormat:@"%@ \u25B6 %@", [from objectForKey:@"name"],
-                    [pageDetails objectForKey:@"name"]];
-        [self.fromImage lazyLoadWithId:[from objectForKey:@"id"]];
+        fromtext = [NSString stringWithFormat:@"%@ \u25B6 %@", [from objectForKey:nameKey],
+                    [pageDetails objectForKey:nameKey]];
+        [self.fromImage lazyLoadWithId:[from objectForKey:idKey]];
     }else{
         
         fromtext = [NSString stringWithFormat:@"%@",
-                    [pageDetails objectForKey:@"name"]];
-        [self.fromImage lazyLoadWithId:[pageDetails objectForKey:@"id"]];
+                    [pageDetails objectForKey:nameKey]];
+        [self.fromImage lazyLoadWithId:[pageDetails objectForKey:idKey]];
     }
     
     self.from.text = fromtext;
-    [self.views updateViewCount:[post objectForKey:@"id"]];
+    [self.views updateViewCount:[post objectForKey:idKey]];
 }
 
 @end

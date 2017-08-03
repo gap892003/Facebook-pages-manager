@@ -8,6 +8,7 @@
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "UIImageView+ImageHelper.h"
+#import "Constants.h"
 
 @implementation UIImageView (ImageHelper)
 
@@ -43,8 +44,8 @@
     
     NSString *url = nil;
     if (picture != nil) {
-        NSDictionary* data=[picture objectForKey:@"data"];
-        url = [data objectForKey:@"url"];
+        NSDictionary* data=[picture objectForKey:dataKey];
+        url = [data objectForKey:urlKey];
     }
     [self lazyLoadWithUrl:url];
 }
@@ -76,9 +77,9 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                      initWithGraphPath:[NSString stringWithFormat:@"/%@/picture?fields=url&type=small&redirect=0",objectID]
+                                      initWithGraphPath:[NSString stringWithFormat:pictureRequestPath,objectID]
                                       parameters:nil
-                                      HTTPMethod:@"GET"];
+                                      HTTPMethod:HTTP_GET];
         [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
                                               id result,
                                               NSError *error) {
@@ -86,9 +87,9 @@
                 return;
             }
             
-            NSDictionary *data = [result objectForKey:@"data"];
+            NSDictionary *data = [result objectForKey:dataKey];
             if (data != nil)
-            [self lazyLoadWithUrl:[data objectForKey:@"url"]];
+            [self lazyLoadWithUrl:[data objectForKey:urlKey]];
         }];
     });
 
