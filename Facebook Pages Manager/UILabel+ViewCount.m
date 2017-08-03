@@ -8,6 +8,7 @@
 
 #import "UILabel+ViewCount.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Constants.h"
 
 @implementation UILabel (ViewCount)
 
@@ -15,14 +16,14 @@
     
     self.text = @"-";
     
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@/insights/post_impressions/lifetime",objectID] parameters:nil HTTPMethod:@"GET"] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:insights_postImpressions,objectID] parameters:nil HTTPMethod:HTTP_GET] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 
-        NSArray* data = [result objectForKey:@"data"];
+        NSArray* data = [result objectForKey:dataKey];
         if (data != nil && [data count] > 0) {
             NSDictionary* dataVal = [data objectAtIndex:0];
-            NSArray *values = [dataVal objectForKey:@"values"];
+            NSArray *values = [dataVal objectForKey:valuesKey];
             NSDictionary *valuesDict = [values objectAtIndex:0];
-            NSNumber* value = [valuesDict objectForKey:@"value"];
+            NSNumber* value = [valuesDict objectForKey:valueKey];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 

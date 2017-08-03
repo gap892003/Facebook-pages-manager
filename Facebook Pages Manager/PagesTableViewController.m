@@ -10,6 +10,7 @@
 #import "PostsTableViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "UIImageView+ImageHelper.h"
+#import "Constants.h"
 
 @interface PagesTableViewController ()
 @property (nonatomic,copy) NSArray *pages;
@@ -27,11 +28,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:@{@"fields":@"access_token,category,id,name,perms,picture",}]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:accountsRequest parameters:PAGES_PARAMS]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"fetched user:%@", result);
-                 _pages = [result valueForKey:@"data"];
+                 _pages = [result valueForKey:dataKey];
                  [self.tableView reloadData];
              }
          }];
@@ -81,8 +82,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     NSDictionary *currentPage = [_pages objectAtIndex:indexPath.row] ;
-    cell.textLabel.text = [currentPage valueForKey:@"name"];
-    [cell.imageView lazyLoadImageForPage:[currentPage objectForKey:@"picture"]];
+    cell.textLabel.text = [currentPage valueForKey:nameKey];
+    [cell.imageView lazyLoadImageForPage:[currentPage objectForKey:pictureKey]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
 }

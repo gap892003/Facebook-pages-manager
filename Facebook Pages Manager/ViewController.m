@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Constants.h"
 
 @interface ViewController ()
 @property (nonatomic) FBSDKLoginButton *loginButton;
@@ -22,12 +23,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     _loginButton = [[FBSDKLoginButton alloc] init];
     [self.stackView addArrangedSubview:_loginButton];
-    _loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends"];
-    _loginButton.publishPermissions = @[@"manage_pages", @"publish_pages",@"publish_actions"];
+    _loginButton.readPermissions = READ_PERMISSIONS;
+    _loginButton.publishPermissions = PUBLISH_PERMISSIONS;
     [_loginButton setDelegate:self];
     // make graph api call here
     if ([FBSDKAccessToken currentAccessToken]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me/accounts" parameters:nil]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:accountsRequest parameters:nil]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"fetched user:%@", result);

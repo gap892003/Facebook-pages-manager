@@ -9,6 +9,7 @@
 #import "ScheduledPostsViewController.h"
 #import "PostsTableViewCell.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Constants.h"
 
 @interface ScheduledPostsViewController ()
 @property (nonatomic,copy) NSMutableArray *posts;
@@ -20,7 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 500;
+    self.tableView.estimatedRowHeight = ESTIMATED_ROW_HEIGHT;
     [self getScheduledPosts];
 }
 
@@ -79,14 +80,14 @@
         
         NSString* pageid =[_pageDetails valueForKey:@"id"];
         
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/promotable_posts"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"is_published":@"false"}
-            tokenString:[_pageDetails objectForKey:@"access_token"] version:@"v2.10"
-                                           HTTPMethod:@"GET"]
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:promotablePostsPath] parameters:scheduledPostsParams
+            tokenString:[_pageDetails objectForKey:accessTokenKey] version:graphAPIVersion
+                                           HTTPMethod:HTTP_GET]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  
                  NSLog(@"%@", result);
-                 _posts = [[result valueForKey:@"data"] mutableCopy];
+                 _posts = [[result valueForKey:dataKey] mutableCopy];
                  [self.tableView reloadData];
              }
          }];

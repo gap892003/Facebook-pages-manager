@@ -66,6 +66,7 @@
 		F40E07791F20774200EC1C2D /* Facebook Pages ManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Facebook Pages ManagerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40E077D1F20774200EC1C2D /* Facebook_Pages_ManagerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Facebook_Pages_ManagerUITests.m; sourceTree = "<group>"; };
 		F40E077F1F20774200EC1C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F414A1381F32C60B00F518E7 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F4473E1D1F21A6D0006E310A /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../FacebookSDKs-iOS-4.24.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		F4473E1F1F21AAEF006E310A /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../FacebookSDKs-iOS-4.24.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		F4BD1F011F23437500C7A82D /* PostsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsTableViewController.h; sourceTree = "<group>"; };
@@ -154,6 +155,7 @@
 				F40E07611F20774200EC1C2D /* Facebook_Pages_Manager.xcdatamodeld */,
 				F40E07551F20774200EC1C2D /* Supporting Files */,
 				F4BD1F321F2C844800C7A82D /* UI Components */,
+				F414A1381F32C60B00F518E7 /* Constants.h */,
 			);
 			path = "Facebook Pages Manager";
 			sourceTree = "<group>";

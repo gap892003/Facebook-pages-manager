@@ -8,6 +8,7 @@
 
 #import "CreatePostViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Constants.h"
 
 @interface CreatePostViewController ()
 @property(nonatomic) BOOL dirty;
@@ -19,6 +20,8 @@
 static NSString* placeHolderText = @"Write here";
 static NSString* backdate = @"Backdate";
 static NSString* scheduleTitle = @"Schedule";
+static NSString* postTitle = @"Post";
+
 @implementation CreatePostViewController
 
 - (void)viewDidLoad {
@@ -92,16 +95,16 @@ static NSString* scheduleTitle = @"Schedule";
     }
     
     
-    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"manage_pages"]) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/feed",_pageId]
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:managePages]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:pageFeedPath,_pageId]
           parameters: [self getParameters]
           tokenString: _pageAccessToken
-          version:@"v2.10"
-          HTTPMethod:@"POST"]
+          version:graphAPIVersion
+          HTTPMethod:HTTP_POST]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
-                 NSLog(@"Post id:%@", result[@"id"]);
-                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"reloadPageFeed" object:nil]];
+                 NSLog(@"Post id:%@", result[idKey]);
+                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:reloadPageNotification object:nil]];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      
                      [self dismissSelf:nil];
@@ -118,11 +121,11 @@ static NSString* scheduleTitle = @"Schedule";
     
     if ([[[_postButton titleLabel] text] isEqualToString:backdate]){
     
-        [params setObject:timeToPostInt forKey:@"backdated_time"];
+        [params setObject:timeToPostInt forKey:backdatedTimeParam];
     }else if ([[[_postButton titleLabel] text] isEqualToString:scheduleTitle]){
         
-        [params setObject:timeToPostInt forKey:@"scheduled_publish_time"];
-        [params setObject:@"false" forKey:@"published"];
+        [params setObject:timeToPostInt forKey:scheduledPublishTimeParam];
+        [params setObject:@"false" forKey:publishedParam];
     }
     
     return params;
@@ -158,7 +161,7 @@ static NSString* scheduleTitle = @"Schedule";
     
     if(diff < 60 && diff > -60){
         
-        [_postButton setTitle:@"Post" forState:UIControlStateNormal];
+        [_postButton setTitle:postTitle forState:UIControlStateNormal];
         _timeToPost = 0;
     }else if (diff < 0){
         

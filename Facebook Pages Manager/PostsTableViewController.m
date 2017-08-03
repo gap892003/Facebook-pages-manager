@@ -13,6 +13,7 @@
 #import "UIImageView+ImageHelper.h"
 #import "CreatePostViewController.h"
 #import "ScheduledPostsViewController.h"
+#import "Constants.h"
 
 @interface PostsTableViewController ()
 
@@ -30,13 +31,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 531;
+    self.tableView.estimatedRowHeight = ESTIMATED_ROW_HEIGHT;
     UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
     self.navigationItem.rightBarButtonItem = item;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPageFeed) name:@"reloadPageFeed" object:nil];
-    [self setTitle:[self.pageDetails valueForKey:@"name"]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPageFeed) name:reloadPageNotification object:nil];
+    [self setTitle:[self.pageDetails valueForKey:nameKey]];
     if (_pageDetails == nil) return;
     [self getPageFeed];
 }
@@ -80,7 +81,7 @@
 
     PostsTableViewCell *cell;
     NSString* cellIdentifier= nil ;
-    if ([[post objectForKey:@"type"] isEqualToString:@"photo"]){
+    if ([[post objectForKey:typeKey] isEqualToString:photoPost]){
         
         cellIdentifier = @"postsImageViewCell";
     }else{
@@ -158,13 +159,13 @@
 
     if ([FBSDKAccessToken currentAccessToken]) {
         
-        NSString* pageid =[_pageDetails valueForKey:@"id"];
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:@"/feed"] parameters:@{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",} HTTPMethod:@"GET"]
+        NSString* pageid =[_pageDetails valueForKey:idKey];
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:[pageid stringByAppendingString:feedPath] parameters:FEED_PARAMS HTTPMethod:HTTP_GET]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  
                  NSLog(@"%@", result);
-                 _posts = [[result valueForKey:@"data"] mutableCopy];
+                 _posts = [[result valueForKey:dataKey] mutableCopy];
                  [self.tableView reloadData];
              }
          }];
@@ -181,8 +182,8 @@
     [self.navigationController presentViewController:posts animated:YES completion:^{
         
         CreatePostViewController* createCntl= (CreatePostViewController*)[posts topViewController] ;
-        [createCntl setPageId:[_pageDetails objectForKey:@"id"]];
-        [createCntl setPageAccessToken:[_pageDetails objectForKey:@"access_token"]];
+        [createCntl setPageId:[_pageDetails objectForKey:idKey]];
+        [createCntl setPageAccessToken:[_pageDetails objectForKey:accessTokenKey]];
     }];
     
 }
