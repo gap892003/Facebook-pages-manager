@@ -12,12 +12,13 @@
 
 @implementation UILabel (ViewCount)
 
--(void)updateViewCount:(NSString*) objectID{
+-(void)updateViewCount:(NSString*) objectID accessToken:(NSString*) accessToken{
     
     self.text = @"-";
     
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:insights_postImpressions,objectID] parameters:nil HTTPMethod:HTTP_GET] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:insights_postImpressions,objectID] parameters:POST_VIEWS_PARAM tokenString:accessToken version:graphAPIVersion HTTPMethod:HTTP_GET] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        
+        if (error!=nil) return;
         NSArray* data = [result objectForKey:dataKey];
         if (data != nil && [data count] > 0) {
             NSDictionary* dataVal = [data objectAtIndex:0];

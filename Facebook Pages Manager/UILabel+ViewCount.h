@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (ViewCount)
--(void)updateViewCount:(NSString*) objectID;
+-(void)updateViewCount:(NSString*) objectID accessToken:(NSString*) accessToken;
 @end

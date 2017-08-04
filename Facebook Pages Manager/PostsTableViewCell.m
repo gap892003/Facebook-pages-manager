@@ -93,7 +93,7 @@
     }
     
     self.from.text = fromtext;
-    [self.views updateViewCount:[post objectForKey:idKey]];
+    [self.views updateViewCount:[post objectForKey:idKey] accessToken:[_pageDetails valueForKey:accessTokenKey]];
 }
 
 @end

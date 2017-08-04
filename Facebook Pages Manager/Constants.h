@@ -18,7 +18,7 @@
 static NSString* const accountsRequest = @"me/accounts";
 static NSString* const feedPath = @"/feed";
 static NSString* const pageFeedPath = @"/%@/feed";
-static NSString* const insights_postImpressions = @"%@/insights/post_impressions/lifetime";
+static NSString* const insights_postImpressions = @"%@/insights?metric=post_impressions";
 static NSString* const promotablePostsPath = @"/promotable_posts";
 static NSString* const pictureRequestPath = @"/%@/picture?fields=url&type=small&redirect=0";
 
@@ -26,6 +26,7 @@ static NSString* const pictureRequestPath = @"/%@/picture?fields=url&type=small&
 #define FEED_PARAMS @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",}
 #define PAGES_PARAMS @{@"fields":@"access_token,category,id,name,perms,picture",}
 #define scheduledPostsParams @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"is_published":@"false"}
+#define POST_VIEWS_PARAM @{@"fields":@"id,values,name"}
 
 static NSString* const graphAPIVersion = @"v2.10";
 static NSString* const backdatedTimeParam = @"backdated_time";
