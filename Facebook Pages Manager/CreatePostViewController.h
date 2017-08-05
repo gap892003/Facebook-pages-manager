@@ -17,4 +17,5 @@
 -(IBAction) dismissKeyPad:(id)sender;
 -(IBAction)dismissSelf:(id)sender;
 -(IBAction)selectTime:(id)sender;
+-(IBAction)savePost:(id)sender;
 @end

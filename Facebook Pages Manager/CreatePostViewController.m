@@ -83,24 +83,24 @@ static NSString* postTitle = @"Post";
 
 -(IBAction) createPost:(id)sender{
     
-    if (!_dirty || ![_textView hasText]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please enter some text!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * action) {}];
-        
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-    }
-    
-    
+    if(![self validate]) return;
+    [self makeRequest:[self getParameters:NO]];
+}
+
+-(IBAction)savePost:(id)sender{
+
+    if(![self validate]) return;
+    [self makeRequest:[self getParameters:YES]];
+}
+
+-(void) makeRequest:(NSDictionary*) params{
+
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:managePages]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:pageFeedPath,_pageId]
-          parameters: [self getParameters]
-          tokenString: _pageAccessToken
-          version:graphAPIVersion
-          HTTPMethod:HTTP_POST]
+                                           parameters: params
+                                          tokenString: _pageAccessToken
+                                              version:graphAPIVersion
+                                           HTTPMethod:HTTP_POST]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"Post id:%@", result[idKey]);
@@ -114,9 +114,32 @@ static NSString* postTitle = @"Post";
     }
 }
 
--(NSDictionary*) getParameters{
+-(BOOL) validate{
+
+    if (!_dirty || ![_textView hasText]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Please enter some text!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        return false;
+    }
+    
+    return true;
+}
+
+-(NSDictionary*) getParameters:(BOOL) saveOnly{
 
     NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithDictionary: @{ @"message" : _textView.text}];
+    
+    if (saveOnly){
+    
+        [params setObject:@"false" forKey:publishedParam];
+        return params;
+    }
+    
     NSNumber *timeToPostInt = [NSNumber numberWithDouble:_timeToPost];
     
     if ([[[_postButton titleLabel] text] isEqualToString:backdate]){
