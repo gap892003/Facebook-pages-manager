@@ -65,5 +65,5 @@ static NSString* const reloadPageNotification = @"reloadPageFeed";
 
 #pragma mark - otherConstants
 #define ESTIMATED_ROW_HEIGHT 531
-
+static NSString* const savedPostsKeyInDefaults= @"savedPosts";
 #endif /* Constants_h */

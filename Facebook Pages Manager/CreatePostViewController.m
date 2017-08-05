@@ -84,17 +84,18 @@ static NSString* postTitle = @"Post";
 -(IBAction) createPost:(id)sender{
     
     if(![self validate]) return;
-    [self makeRequest:[self getParameters:NO]];
+    [self makeRequest:NO];
 }
 
 -(IBAction)savePost:(id)sender{
 
     if(![self validate]) return;
-    [self makeRequest:[self getParameters:YES]];
+    [self makeRequest:YES];
 }
 
--(void) makeRequest:(NSDictionary*) params{
+-(void) makeRequest:(BOOL) saveOnly{
 
+    NSDictionary *params = [self getParameters:saveOnly];
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:managePages]) {
         [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:pageFeedPath,_pageId]
                                            parameters: params
@@ -104,6 +105,20 @@ static NSString* postTitle = @"Post";
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
              if (!error) {
                  NSLog(@"Post id:%@", result[idKey]);
+                 
+                 // persist saved ids
+/*                 if (saveOnly){
+                     [NSString stringWithFormat:@"%@:%@",savedPostsKeyInDefaults,_pageId];
+                     NSMutableArray* array = [[[NSUserDefaults standardUserDefaults] objectForKey:savedPostsKeyInDefaults] mutableCopy];
+                     if (array == nil){
+                         
+                         array = [[NSMutableArray alloc] init];
+                     }
+                     [array addObject:result[idKey]];
+                     [[NSUserDefaults standardUserDefaults] setObject:array forKey:savedPostsKeyInDefaults];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                 }
+*/                 
                  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:reloadPageNotification object:nil]];
                  dispatch_async(dispatch_get_main_queue(), ^{
                      

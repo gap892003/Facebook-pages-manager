@@ -57,7 +57,7 @@
         return cell;
     }
     
-    NSDictionary *post = [_posts objectAtIndex:([indexPath row]-1)/2];
+    NSDictionary *post = [_posts objectAtIndex:([indexPath row])/2];
     
     PostsTableViewCell *cell;
     NSString* cellIdentifier= nil ;
