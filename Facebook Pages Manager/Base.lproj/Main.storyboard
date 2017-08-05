@@ -43,6 +43,14 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOY-7F-T05">
+                                <rect key="frame" x="246" y="576" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Easter egg"/>
+                                <connections>
+                                    <action selector="createTestUsers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t00-PF-aOT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

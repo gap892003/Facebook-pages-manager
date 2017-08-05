@@ -12,5 +12,6 @@
 @interface ViewController : UIViewController <FBSDKLoginButtonDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIStackView *stackView;
+-(IBAction)createTestUsers:(id)sender;
 @end
 
