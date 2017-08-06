@@ -93,7 +93,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                 //681421808714961
                 NSString *accessTokenForCurrentUser = [result valueForKey:accessTokenKey];
                 NSDictionary *params = @{
-                                         @"object": @"https://graph.facebook.com/681421808714961"                                         
+                                         @"object": @"https://graph.facebook.com/681421808714961"
                                          };
                 /* make the API call */
                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]

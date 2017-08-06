@@ -12,6 +12,7 @@
 
 #define READ_PERMISSIONS  @[@"public_profile", @"email", @"user_friends",@"read_insights"]
 #define PUBLISH_PERMISSIONS @[@"manage_pages", @"publish_pages",@"publish_actions"]
+#define LIMIT_POSTS @"100"
 
 #pragma mark - Requests
 
@@ -25,9 +26,9 @@ static NSString* const oauthPath = @"oauth/access_token";
 static NSString* const createTestUsersPath =  @"/%@/accounts/test-users";
 
 #pragma mark - RequestParams
-#define FEED_PARAMS @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",}
+#define FEED_PARAMS @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"limit":LIMIT_POSTS}
 #define PAGES_PARAMS @{@"fields":@"access_token,category,id,name,perms,picture",}
-#define scheduledPostsParams @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"is_published":@"false"}
+#define scheduledPostsParams @{ @"fields": @"id,full_picture,object_id,name,message,created_time, is_hidden, is_published,privacy,type,from",@"is_published":@"false",@"limit":LIMIT_POSTS}
 #define POST_VIEWS_PARAM @{@"fields":@"id,values,name"}
 #define APP_ACCESS_PARAM @{@"client_id":@"651682695041859",@"client_secret":@"6d284fa001553acfbecd3cfce2f763a7",@"grant_type":@"client_credentials"}
 #define TEST_USER_PERMS @{@"permissions":@"public_profile, email, user_friends, read_insights,publish_actions", @"installed": @"true"}

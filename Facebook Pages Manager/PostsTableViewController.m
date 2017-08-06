@@ -16,7 +16,7 @@
 #import "Constants.h"
 
 @interface PostsTableViewController ()
-
+@property (nonatomic,strong) UIBarButtonItem *addButton;
 @end
 
 @implementation PostsTableViewController
@@ -32,8 +32,8 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = ESTIMATED_ROW_HEIGHT;
-    UIBarButtonItem *item = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
-    self.navigationItem.rightBarButtonItem = item;
+    _addButton = [[UIBarButtonItem alloc]  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(createPost)];
+    self.navigationItem.rightBarButtonItem = _addButton;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPageFeed) name:reloadPageNotification object:nil];
@@ -121,7 +121,6 @@
     }
 }
 
-
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
@@ -178,6 +177,7 @@
     UINavigationController *posts = [storyBoard instantiateViewControllerWithIdentifier:@"createPosts"];
     posts.modalPresentationStyle = UIModalPresentationPopover;
     UIPopoverPresentationController *popover =  posts.popoverPresentationController;
+    popover.barButtonItem = self.addButton;
     [popover setDelegate:self];
     [self.navigationController presentViewController:posts animated:YES completion:^{
         
