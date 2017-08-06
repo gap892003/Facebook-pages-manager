@@ -76,7 +76,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 //        NSLog (@"Response %@", result);
 //        if (error!=nil) return;
     
-    for (int i=0; i< 30; ++i){
+    for (int i=0; i< 1; ++i){
     
     
         [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:createTestUsersPath, appID]
@@ -93,19 +93,19 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                 //681421808714961
                 NSString *accessTokenForCurrentUser = [result valueForKey:accessTokenKey];
                 NSDictionary *params = @{
-                                         @"object": @"https://graph.facebook.com/681421808714961",
+                                         @"object": @"https://graph.facebook.com/681421808714961"                                         
                                          };
                 /* make the API call */
                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-                                              initWithGraphPath:@"me/og.likes"
+                                              initWithGraphPath:[NSString stringWithFormat:@"%@/og.likes",[result valueForKey:idKey]]
                                               parameters:params
                                               tokenString:accessTokenForCurrentUser version:graphAPIVersion
                                               HTTPMethod:HTTP_POST];
                 [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-                                                      id result,
+                                                      id result2,
                                                       NSError *error) {
                     
-                    if (error!=nil){
+                    if (error==nil){
                         
                         NSLog(@"Liked Page");
                     }
