@@ -482,7 +482,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Scheduled Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yZb-cG-BrK">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Scheduled &amp; Saved Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yZb-cG-BrK">
                                             <rect key="frame" x="15" y="0.0" width="325" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
